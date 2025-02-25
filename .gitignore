@@ -140,3 +140,6 @@ dmypy.json
 
 # MacOS system file
 .DS_Store
+
+transformer_120.pth
+resnet50-19c8e357.pth

@@ -21,7 +21,7 @@ def load_checkpoint(model, checkpoint_path):
     else:
         checkpoint = load_state_dict_from_url(checkpoint_path, map_location='cpu')
 
-    
+    print(f"check point is {list(checkpoint.keys())}")
     orig_state_dict = checkpoint['model']
     new_state_dict = {}
     for key, item in orig_state_dict.items():

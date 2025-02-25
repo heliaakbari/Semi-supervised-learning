@@ -263,4 +263,5 @@ class ResNet50(nn.Module):
 
 def resnet50(pretrained=False, pretrained_path=None, **kwargs):
     model = ResNet50(**kwargs)
+    print(f"resnet50 is being used as network with pretrain equals to {pretrained} and in the path {pretrained_path}")
     return model

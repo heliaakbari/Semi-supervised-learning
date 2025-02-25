@@ -1,0 +1,58 @@
+algorithm: fixmatch
+net: resnet50
+net_from_name: False
+use_pretrain: True
+pretrain_path: ./resnet50-19c8e357.pth
+save_dir: ./saved_models/usb_cv/
+save_name: fixmatch_market1501_trainsplit
+resume: False
+load_path: ./saved_models/usb_cv/fixmatch_market1501/latest_model.pth
+overwrite: True
+use_tensorboard: True
+use_wandb: False
+
+# optimization configs
+epoch: 200 #for all the configs in usb_cv is the same
+num_train_iter: 204800  #for all the configs in usb_cv is the same
+num_eval_iter: 2048     #for all the configs in usb_cv is the same
+num_log_iter: 256       #for all the configs in usb_cv is the same
+num_warmup_iter: 5120
+
+optim: AdamW          #for all the configs in usb_cv is the same
+lr: 5e-4
+layer_decay: 0.95        #???
+batch_size: 8           #for all the configs in usb_cv is the same
+eval_batch_size: 16     #for all the configs in usb_cv is the same
+
+# dataset configs           #sina should do this part
+dataset: market1501
+num_labels: 751
+num_classes: 751
+img_size: (384, 128)
+crop_ratio: 0.875
+data_dir: ./data
+train_sampler: RandomSampler
+
+# algorithm specific configs
+hard_label: True
+ema_m: 0.0
+momentum: 0.9
+weight_decay: 0.0005
+uratio: 1
+ulb_loss_ratio: 1.0
+T: 0.5
+p_cutoff: 0.95
+amp: False
+clip: 0.0
+use_cat: True
+
+# device configs
+world_size: 1
+num_workers: 4
+seed: 0
+rank: 0
+multiprocessing_distributed: False
+distributed: False
+dist_url: tcp://127.0.0.1:10007
+dist_backend: gloo
+gpu: 0

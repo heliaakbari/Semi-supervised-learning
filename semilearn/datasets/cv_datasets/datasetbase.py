@@ -89,6 +89,8 @@ class BasicDataset(Dataset):
         else:
             if isinstance(img, np.ndarray):
                 img = Image.fromarray(img)
+            if isinstance(img, str):
+                img = Image.open(img).convert("RGB")
             img_w = self.transform(img)
             if not self.is_ulb:
                 return {'idx_lb': idx, 'x_lb': img_w, 'y_lb': target} 

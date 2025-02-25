@@ -1,0 +1,58 @@
+nohup: ignoring input
+Create optimizer and scheduler
+Epoch: 0
+/home/zakerian/USB/Semi-supervised-learning/semilearn/core/algorithmbase.py:65: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self.loss_scaler = GradScaler()
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-19 22:04:52,985 INFO] confusion matrix
+[2025-02-19 22:04:52,985 INFO] [[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+[2025-02-19 22:04:52,986 INFO] evaluation metric
+[2025-02-19 22:04:52,986 INFO] acc: 0.0013
+[2025-02-19 22:04:52,986 INFO] precision: 0.0000
+[2025-02-19 22:04:52,986 INFO] recall: 0.0013
+[2025-02-19 22:04:52,986 INFO] f1: 0.0000
+model saved: ./saved_models/usb_cv/fixmatch_market1501/latest_model.pth
+model saved: ./saved_models/usb_cv/fixmatch_market1501/model_best.pth
+Epoch: 1
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-19 22:06:15,730 INFO] confusion matrix
+[2025-02-19 22:06:15,730 INFO] [[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+[2025-02-19 22:06:15,731 INFO] evaluation metric
+[2025-02-19 22:06:15,731 INFO] acc: 0.0010
+[2025-02-19 22:06:15,731 INFO] precision: 0.0000
+[2025-02-19 22:06:15,731 INFO] recall: 0.0011
+[2025-02-19 22:06:15,731 INFO] f1: 0.0000
+model saved: ./saved_models/usb_cv/fixmatch_market1501/latest_model.pth
+Epoch: 2
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-19 22:07:38,078 INFO] confusion matrix
+[2025-02-19 22:07:38,078 INFO] [[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+[2025-02-19 22:07:38,079 INFO] evaluation metric
+[2025-02-19 22:07:38,079 INFO] acc: 0.0014
+[2025-02-19 22:07:38,079 INFO] precision: 0.0000
+[2025-02-19 22:07:38,079 INFO] recall: 0.0022
+[2025-02-19 22:07:38,079 INFO] f1: 0.0000
+model saved: ./saved_models/usb_cv/fixmatch_market1501/latest_model.pth
+model saved: ./saved_models/usb_cv/fixmatch_market1501/model_best.pth
+Epoch: 3
