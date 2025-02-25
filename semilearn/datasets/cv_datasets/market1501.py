@@ -24,7 +24,7 @@ def get_data(data_dir, train=True):
     gallery_images, gallery_labels = load_market1501_images(gallery_dir, relabel=True)
     query_images, query_labels = load_market1501_images(query_dir, relabel=True)
 
-    test_images = gallery_images + query_images
+    test_images = np.concatenate((query_images, gallery_images))
     test_labels = np.concatenate((gallery_labels, query_labels))
 
     print(f"Train set: {len(train_images)} images, {len(set(train_labels))} identities")

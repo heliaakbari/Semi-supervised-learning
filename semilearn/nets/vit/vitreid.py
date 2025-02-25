@@ -335,7 +335,9 @@ class TransReID(nn.Module):
 
     def forward(self, x, cam_label=None, view_label=None):
         x = self.forward_features(x, cam_label, view_label)
-        return x
+        output = self.fc(x)
+        result_dict = {'logits': output, 'feat': x}
+        return result_dict
 
     def load_param(self, model_path,hw_ratio):
         param_dict = torch.load(model_path, map_location='cpu')
@@ -397,12 +399,13 @@ def resize_pos_embed(posemb, posemb_new, hight, width, hw_ratio):
     return posemb
 
 
-def vit_base_patch16_224_TransReID(pretrained=False, pretrained_path=None,img_size=(256, 128), stride_size=16, drop_path_rate=0.1, camera=0, view=0,local_feature=False,sie_xishu=1.5, **kwargs):
+def vit_base_patch16_224_TransReID(pretrained=False, pretrained_path=None, img_size=(256, 128), stride_size=16, drop_path_rate=0.1, camera=0, view=0,local_feature=False, sie_xishu=1.5, **kwargs):
     print(f"the vit base p16 224 transreid is being used with pretrian path: {pretrained_path}")
     model = TransReID(img_size=img_size, patch_size=16, stride_size=stride_size, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4, qkv_bias=True, camera=camera, view=view, drop_path_rate=drop_path_rate, sie_xishu=sie_xishu, local_feature=local_feature, **kwargs)
     if pretrained:
         model = load_checkpoint(model, pretrained_path)   
     return model
+
 
 def vit_small_patch16_224_TransReID(pretrained=False, pretrained_path=None,img_size=(256, 128), stride_size=16, drop_path_rate=0.1, camera=0, view=0, local_feature=False, sie_xishu=1.5, **kwargs):
     model = TransReID(img_size=img_size, patch_size=16, stride_size=stride_size, embed_dim=384, depth=12, num_heads=6, mlp_ratio=4, qkv_bias=True,drop_path_rate=drop_path_rate, camera=camera, view=view, sie_xishu=sie_xishu, local_feature=local_feature,  **kwargs)

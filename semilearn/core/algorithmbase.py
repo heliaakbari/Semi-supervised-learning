@@ -10,7 +10,8 @@ from sklearn.metrics import accuracy_score, balanced_accuracy_score, precision_s
 
 import torch
 import torch.nn.functional as F
-from torch.cuda.amp import autocast, GradScaler
+from torch.cuda.amp import autocast
+from torch.amp.grad_scaler import GradScaler
 
 from semilearn.core.hooks import Hook, get_priority, CheckpointHook, TimerHook, LoggingHook, DistSamplerSeedHook, ParamUpdateHook, EvaluationHook, EMAHook, WANDBHook, AimHook
 from semilearn.core.utils import get_dataset, get_data_loader, get_optimizer, get_cosine_schedule_with_warmup, Bn_Controller
@@ -313,10 +314,33 @@ class AlgorithmBase:
 
         self.call_hook("after_run")
 
+    def compute_map(self, probs, labels):
+        """
+        Compute Mean Average Precision (mAP).
+        """
+        num_samples = len(labels)
+        average_precisions = []
+
+        for i in range(num_samples):
+            y_true = np.zeros_like(labels)
+            y_true[labels[i]] = 1  # Set the correct label as 1
+
+            # Sort by probability scores
+            indices = np.argsort(-probs[i])  # Descending order
+            sorted_true = y_true[indices]
+
+            # Compute precision at each relevant position
+            correct = np.cumsum(sorted_true)
+            precision_at_k = correct / (np.arange(len(correct)) + 1)
+            average_precision = np.sum(precision_at_k * sorted_true) / max(1, sorted_true.sum())
+
+            average_precisions.append(average_precision)
+
+        return np.mean(average_precisions)
 
     def evaluate(self, eval_dest='eval', out_key='logits', return_logits=False):
         """
-        evaluation function
+        Evaluation function with Rank-k and mAP metrics.
         """
         self.model.eval()
         self.ema.apply_shadow()
@@ -332,7 +356,7 @@ class AlgorithmBase:
             for data in eval_loader:
                 x = data['x_lb']
                 y = data['y_lb']
-                
+
                 if isinstance(x, dict):
                     x = {k: v.cuda(self.gpu) for k, v in x.items()}
                 else:
@@ -342,17 +366,25 @@ class AlgorithmBase:
                 num_batch = y.shape[0]
                 total_num += num_batch
 
-                logits = self.model(x)[out_key]
-                
+                logits = self.model(x)[out_key]  # Get model predictions
                 loss = F.cross_entropy(logits, y, reduction='mean', ignore_index=-1)
+
                 y_true.extend(y.cpu().tolist())
-                y_pred.extend(torch.max(logits, dim=-1)[1].cpu().tolist())
                 y_logits.append(logits.cpu().numpy())
-                y_probs.extend(torch.softmax(logits, dim=-1).cpu().tolist())
+
+                # Get probabilities
+                probs = torch.softmax(logits, dim=-1).cpu().numpy()
+                y_probs.extend(probs)
+                y_pred.extend(torch.max(logits, dim=-1)[1].cpu().tolist())
+
                 total_loss += loss.item() * num_batch
+
         y_true = np.array(y_true)
         y_pred = np.array(y_pred)
         y_logits = np.concatenate(y_logits)
+        y_probs = np.array(y_probs)
+
+        # Compute standard metrics
         top1 = accuracy_score(y_true, y_pred)
         top5 = top_k_accuracy_score(y_true, y_probs, k=5)
         balanced_top1 = balanced_accuracy_score(y_true, y_pred)
@@ -360,17 +392,38 @@ class AlgorithmBase:
         recall = recall_score(y_true, y_pred, average='macro')
         F1 = f1_score(y_true, y_pred, average='macro')
 
+        # Compute Rank-k Accuracy
+        rank1 = top_k_accuracy_score(y_true, y_probs, k=1)
+        rank5 = top_k_accuracy_score(y_true, y_probs, k=5)
+        rank10 = top_k_accuracy_score(y_true, y_probs, k=10)
+
+        # Compute mAP
+        mAP = self.compute_map(y_probs, y_true)
+
+        # Print confusion matrix
         cf_mat = confusion_matrix(y_true, y_pred, normalize='true')
         self.print_fn('confusion matrix:\n' + np.array_str(cf_mat))
+
         self.ema.restore()
         self.model.train()
 
-        eval_dict = {eval_dest+'/loss': total_loss / total_num, eval_dest+'/top-1-acc': top1, eval_dest+'/top-5-acc': top5, 
-                     eval_dest+'/balanced_acc': balanced_top1, eval_dest+'/precision': precision, eval_dest+'/recall': recall, eval_dest+'/F1': F1}
-        if return_logits:
-            eval_dict[eval_dest+'/logits'] = y_logits
-        return eval_dict
+        eval_dict = {
+            eval_dest + '/loss': total_loss / total_num,
+            eval_dest + '/top-1-acc': top1,
+            eval_dest + '/top-5-acc': top5,
+            eval_dest + '/balanced_acc': balanced_top1,
+            eval_dest + '/precision': precision,
+            eval_dest + '/recall': recall,
+            eval_dest + '/F1': F1,
+            eval_dest + '/rank-1': rank1,
+            eval_dest + '/rank-5': rank5,
+            eval_dest + '/rank-10': rank10,
+            eval_dest + '/mAP': mAP
+        }
 
+        if return_logits:
+            eval_dict[eval_dest + '/logits'] = y_logits
+        return eval_dict
 
     def get_save_dict(self):
         """

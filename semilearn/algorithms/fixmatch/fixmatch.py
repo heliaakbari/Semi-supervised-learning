@@ -10,6 +10,47 @@ from semilearn.algorithms.hooks import PseudoLabelingHook, FixedThresholdingHook
 from semilearn.algorithms.utils import SSL_Argument, str2bool
 
 
+def _batch_hard(mat_distance, mat_similarity, indice=False):
+    sorted_mat_distance, positive_indices = torch.sort(mat_distance + (-9999999.) * (1 - mat_similarity), dim=1, descending=True)
+    hard_p = sorted_mat_distance[:, 0]
+    hard_p_indice = positive_indices[:, 0]
+    sorted_mat_distance, negative_indices = torch.sort(mat_distance + (9999999.) * (mat_similarity), dim=1, descending=False)
+    hard_n = sorted_mat_distance[:, 0]
+    hard_n_indice = negative_indices[:, 0]
+    if(indice):
+        return hard_p, hard_n, hard_p_indice, hard_n_indice
+    return hard_p, hard_n
+
+
+def euclidean_dist(x, y):
+    m, n = x.size(0), y.size(0)
+    xx = torch.pow(x, 2).sum(1, keepdim=True).expand(m, n)
+    yy = torch.pow(y, 2).sum(1, keepdim=True).expand(n, m).t()
+    dist = xx + yy
+    dist.addmm_(1, -2, x, y.t())
+    dist = dist.clamp(min=1e-12).sqrt()  # for numerical stability
+    return dist
+
+
+class SoftTripletLoss(nn.Module):
+    def __init__(self, margin=0.0):
+        super(SoftTripletLoss, self).__init__()
+        self.margin = margin
+
+    def forward(self, emb, label):
+        mat_dist = euclidean_dist(emb, emb)
+        assert mat_dist.size(0) == mat_dist.size(1)
+        N = mat_dist.size(0)
+        mat_sim = label.expand(N, N).eq(label.expand(N, N).t()).float()
+
+        dist_ap, dist_an, ap_idx, an_idx = _batch_hard(mat_dist, mat_sim, indice=True)
+        assert dist_an.size(0) == dist_ap.size(0)
+        triple_dist = torch.stack((dist_ap, dist_an), dim=1)
+        triple_dist = F.log_softmax(triple_dist, dim=1)
+        loss = (- self.margin * triple_dist[:, 0] - (1 - self.margin) * triple_dist[:, 1]).mean()
+
+        return loss
+
 @ALGORITHMS.register('fixmatch')
 class FixMatch(AlgorithmBase):
     """
@@ -21,7 +62,7 @@ class FixMatch(AlgorithmBase):
         # FixMatch-specific arguments
         self.init(T=args.T, p_cutoff=args.p_cutoff, hard_label=args.hard_label, lambda_t=args.lambda_t)
         # Triplet loss function
-        self.triplet_loss = nn.TripletMarginLoss(margin=args.triplet_margin, p=2)
+        self.triplet_loss = SoftTripletLoss().cuda()
 
     def init(self, T, p_cutoff, hard_label=True, lambda_t=0.1):
         self.T = T
@@ -42,7 +83,6 @@ class FixMatch(AlgorithmBase):
             if self.use_cat:
                 inputs = torch.cat((x_lb, x_ulb_w, x_ulb_s))
                 outputs = self.model(inputs)
-                print("Logits shape:", outputs.shape)
                 logits_x_lb = outputs['logits'][:num_lb]
                 logits_x_ulb_w, logits_x_ulb_s = outputs['logits'][num_lb:].chunk(2)
                 feats_x_lb = outputs['feat'][:num_lb]
@@ -88,14 +128,13 @@ class FixMatch(AlgorithmBase):
                                            mask=mask)
 
         # Combine total loss
-        triplet_loss = self.triplet_loss(feats_x_lb, feats_x_ulb_w, feats_x_ulb_s)
+        #triplet_loss = self.triplet_loss(logits_x_lb, y_lb)
 
-        total_loss = sup_loss + self.lambda_u * unsup_loss + self.lambda_t * triplet_loss
+        total_loss = sup_loss + self.lambda_u * unsup_loss
 
         out_dict = self.process_out_dict(loss=total_loss, feat=feat_dict)
         log_dict = self.process_log_dict(sup_loss=sup_loss.item(),
                                          unsup_loss=unsup_loss.item(),
-                                         triplet_loss=triplet_loss.item(),
                                          total_loss=total_loss.item(),
                                          util_ratio=mask.float().mean().item())
 

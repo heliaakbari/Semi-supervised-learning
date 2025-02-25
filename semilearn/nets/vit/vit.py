@@ -13,7 +13,7 @@ from timm.layers import DropPath, trunc_normal_
 from timm.layers.helpers import to_2tuple
 
 from semilearn.nets.utils import load_checkpoint
-
+from semilearn.nets.transformer_layers import load_checkpoint as load_transformer
 
 class PatchEmbed(nn.Module):
     """ 2D Image to Patch Embedding
@@ -288,4 +288,16 @@ def vit_base_patch16_224(pretrained=False, pretrained_path=None, **kwargs):
     model = VisionTransformer(**model_kwargs)
     if pretrained:
         model = load_checkpoint(model, pretrained_path)   
+    return model
+
+
+def vit(pretrained=False, pretrained_path=None, **kwargs):
+    """ ViT-Base (ViT-B/16) from original paper (https://arxiv.org/abs/2010.11929).
+    ImageNet-1k weights fine-tuned from in21k @ 224x224, source https://github.com/google-research/vision_transformer.
+    """
+    model_kwargs = dict(img_size=(256, 128), embed_dim=768, depth=12, num_heads=12, drop_path_rate=0.1, mlp_ratio=4, **kwargs)
+    model = VisionTransformer(**model_kwargs)
+    print("mowmowmwmwmowmow")
+    if pretrained:
+        model = load_transformer(model, pretrained_path)
     return model
