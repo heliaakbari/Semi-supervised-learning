@@ -57,8 +57,8 @@ if __name__ == "__main__":
     net.eval()
     
     # specify these arguments manually 
-    args.num_labels = 40
-    args.ulb_num_labels = 49600
+    args.num_labels = 4 * 751
+    args.ulb_num_labels = 19281
     args.lb_imb_ratio = 1
     args.ulb_imb_ratio = 1
     args.seed = 0

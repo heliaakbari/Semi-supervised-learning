@@ -304,7 +304,6 @@ class TransReID(nn.Module):
     def forward_features(self, x, camera_id, view_id):
         B = x.shape[0]
         x = self.patch_embed(x)
-
         cls_tokens = self.cls_token.expand(B, -1, -1)  # stole cls_tokens impl from Phil Wang, thanks
         x = torch.cat((cls_tokens, x), dim=1)
 
@@ -333,10 +332,17 @@ class TransReID(nn.Module):
             return x[:, 0] + gf
         return x[:, 0]
 
-    def forward(self, x, cam_label=None, view_label=None):
+    def forward(self, x, cam_label=None, view_label=None,only_fc=False,only_feat=False):
+        if only_fc:
+            return self.fc(x)
+        
         x = self.forward_features(x, cam_label, view_label)
         output = self.fc(x)
         result_dict = {'logits': output, 'feat': x}
+
+        if only_feat:
+            return x
+        
         return result_dict
 
     def load_param(self, model_path,hw_ratio):

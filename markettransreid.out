@@ -1,0 +1,588 @@
+nohup: ignoring input
+train.py:287: UserWarning: You have chosen to seed training. This will turn on the CUDNN deterministic setting, which can slow down your training considerably! You may see unexpected behavior when restarting from checkpoints.
+  warnings.warn(
+train.py:298: UserWarning: You have chosen a specific GPU. This will completely disable data parallelism.
+  warnings.warn(
+[2025-02-25 23:47:21,958 INFO] Use GPU: 0 for training
+[2025-02-25 23:47:22,478 INFO] unlabeled data number: 12936, labeled data number 751
+[2025-02-25 23:47:22,478 INFO] Create train and test data loaders
+[2025-02-25 23:47:22,478 INFO] [!] data loader keys: dict_keys(['train_lb', 'train_ulb', 'eval'])
+[2025-02-25 23:47:24,848 INFO] Create optimizer and scheduler
+[2025-02-25 23:47:24,850 INFO] Number of Trainable Params: 86323951
+[2025-02-25 23:47:25,110 INFO] Arguments: Namespace(T=0.5, algorithm='fixmatch', amp=False, batch_size=8, c='config/usb_cv/fixmatch/fixmatch_market1501_transReid.yaml', clip=0.0, clip_grad=0, crop_ratio=0.875, data_dir='./data', dataset='market1501', dist_backend='gloo', dist_url='tcp://127.0.0.1:21107', distributed=False, ema_m=0.0, epoch=200, eval_batch_size=16, gpu=0, hard_label=True, imb_algorithm=None, img_size='(256, 128)', include_lb_to_ulb=True, lambda_t=0.1, layer_decay=0.95, lb_dest_len=751, lb_imb_ratio=1, load_path='./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth', lr=0.0005, max_length=512, max_length_seconds=4.0, momentum=0.9, multiprocessing_distributed=False, net='vit_base_patch16_224_TransReID', net_from_name=False, num_classes=751, num_eval_iter=2048, num_labels=751, num_log_iter=256, num_train_iter=204800, num_warmup_iter=5120, num_workers=4, optim='AdamW', overwrite=True, p_cutoff=0.95, pretrain_path='./transformer_120.pth', rank=0, resume=False, sample_rate=16000, save_dir='./saved_models/usb_cv/', save_name='fixmatch_market1501_transReid', seed=0, train_sampler='RandomSampler', triplet_margin=1.0, ulb_dest_len=12936, ulb_imb_ratio=1, ulb_loss_ratio=1.0, ulb_num_labels=None, uratio=5, use_aim=False, use_cat=True, use_pretrain=True, use_tensorboard=True, use_wandb=False, weight_decay=0.0005, world_size=1)
+[2025-02-25 23:47:25,110 INFO] Resume load path ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth does not exist
+[2025-02-25 23:47:25,110 INFO] Model training
+Train set: 12936 images, 751 identities
+Test set: 19281 images, 751 identities
+Train set: 12936 images, 751 identities
+Test set: 19281 images, 751 identities
+the vit base p16 224 transreid is being used with pretrian path: ./transformer_120.pth
+using stride: 16, and patch number is num_y16 * num_x8
+the vit base p16 224 transreid is being used with pretrian path: None
+using stride: 16, and patch number is num_y16 * num_x8
+[2025-02-25 23:52:25,857 INFO] 256 iteration USE_EMA: False, train/sup_loss: 6.1244, train/unsup_loss: 0.0000, train/total_loss: 6.1244, train/util_ratio: 0.0000, train/run_time: 1.1478, lr: 0.0000, train/prefecth_time: 0.0064 
+[2025-02-25 23:57:24,069 INFO] 512 iteration USE_EMA: False, train/sup_loss: 6.0725, train/unsup_loss: 0.0000, train/total_loss: 6.0725, train/util_ratio: 0.0000, train/run_time: 1.1326, lr: 0.0001, train/prefecth_time: 0.0064 
+[2025-02-26 00:02:22,421 INFO] 768 iteration USE_EMA: False, train/sup_loss: 5.1312, train/unsup_loss: 0.0000, train/total_loss: 5.1312, train/util_ratio: 0.0000, train/run_time: 1.1436, lr: 0.0001, train/prefecth_time: 0.0069 
+[2025-02-26 00:07:20,753 INFO] 1024 iteration USE_EMA: False, train/sup_loss: 5.0836, train/unsup_loss: 0.0000, train/total_loss: 5.0836, train/util_ratio: 0.0000, train/run_time: 1.1457, lr: 0.0001, train/prefecth_time: 0.0059 
+[2025-02-26 00:12:19,770 INFO] 1280 iteration USE_EMA: False, train/sup_loss: 4.3072, train/unsup_loss: 0.0000, train/total_loss: 4.3072, train/util_ratio: 0.0000, train/run_time: 1.1423, lr: 0.0001, train/prefecth_time: 0.0070 
+[2025-02-26 00:17:18,214 INFO] 1536 iteration USE_EMA: False, train/sup_loss: 3.0201, train/unsup_loss: 0.0000, train/total_loss: 3.0201, train/util_ratio: 0.0000, train/run_time: 1.1428, lr: 0.0001, train/prefecth_time: 0.0070 
+[2025-02-26 00:22:16,924 INFO] 1792 iteration USE_EMA: False, train/sup_loss: 2.2897, train/unsup_loss: 0.0000, train/total_loss: 2.2897, train/util_ratio: 0.0000, train/run_time: 1.1509, lr: 0.0002, train/prefecth_time: 0.0070 
+[2025-02-26 00:27:15,263 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 00:28:47,046 INFO] confusion matrix:
+[[0.         0.00071327 0.00142653 ... 0.00071327 0.         0.00499287]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.03846154 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 00:28:48,226 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 00:28:49,390 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/model_best.pth
+[2025-02-26 00:28:49,391 INFO] 2048 iteration, USE_EMA: False, train/sup_loss: 2.8931, train/unsup_loss: 0.0000, train/total_loss: 2.8931, train/util_ratio: 0.0000, train/run_time: 1.1333, eval/loss: 8.8091, eval/top-1-acc: 0.0011, eval/top-5-acc: 0.0065, eval/balanced_acc: 0.0014, eval/precision: 0.0008, eval/recall: 0.0014, eval/F1: 0.0009, eval/rank-1: 0.0011, eval/rank-5: 0.0065, eval/rank-10: 0.0134, eval/mAP: 0.0094, lr: 0.0002, train/prefecth_time: 0.0065 BEST_EVAL_ACC: 0.0011, at 2048 iters
+[2025-02-26 00:33:49,011 INFO] 2304 iteration USE_EMA: False, train/sup_loss: 1.6720, train/unsup_loss: 0.0000, train/total_loss: 1.6720, train/util_ratio: 0.0000, train/run_time: 1.1492, lr: 0.0002, train/prefecth_time: 0.0069 
+[2025-02-26 00:38:47,843 INFO] 2560 iteration USE_EMA: False, train/sup_loss: 1.8989, train/unsup_loss: 0.0000, train/total_loss: 1.8989, train/util_ratio: 0.0000, train/run_time: 1.1440, lr: 0.0003, train/prefecth_time: 0.0062 
+[2025-02-26 00:43:46,767 INFO] 2816 iteration USE_EMA: False, train/sup_loss: 1.2216, train/unsup_loss: 0.0000, train/total_loss: 1.2216, train/util_ratio: 0.0000, train/run_time: 1.1522, lr: 0.0003, train/prefecth_time: 0.0069 
+[2025-02-26 00:48:45,724 INFO] 3072 iteration USE_EMA: False, train/sup_loss: 1.0258, train/unsup_loss: 0.1651, train/total_loss: 1.1909, train/util_ratio: 0.0250, train/run_time: 1.1349, lr: 0.0003, train/prefecth_time: 0.0064 
+[2025-02-26 00:53:45,375 INFO] 3328 iteration USE_EMA: False, train/sup_loss: 1.6251, train/unsup_loss: 0.0000, train/total_loss: 1.6251, train/util_ratio: 0.0000, train/run_time: 1.1558, lr: 0.0003, train/prefecth_time: 0.0070 
+[2025-02-26 00:58:44,305 INFO] 3584 iteration USE_EMA: False, train/sup_loss: 1.5400, train/unsup_loss: 0.0000, train/total_loss: 1.5400, train/util_ratio: 0.0000, train/run_time: 1.1402, lr: 0.0003, train/prefecth_time: 0.0066 
+[2025-02-26 01:03:43,091 INFO] 3840 iteration USE_EMA: False, train/sup_loss: 0.2373, train/unsup_loss: 0.0000, train/total_loss: 0.2373, train/util_ratio: 0.0000, train/run_time: 1.1407, lr: 0.0004, train/prefecth_time: 0.0068 
+[2025-02-26 01:08:41,958 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 01:10:13,822 INFO] confusion matrix:
+[[0.00142653 0.00142653 0.00142653 ... 0.00035663 0.         0.0032097 ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.03125    0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 01:10:20,264 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 01:10:28,777 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/model_best.pth
+[2025-02-26 01:10:28,779 INFO] 4096 iteration, USE_EMA: False, train/sup_loss: 3.0987, train/unsup_loss: 0.2521, train/total_loss: 3.3507, train/util_ratio: 0.0250, train/run_time: 1.1419, eval/loss: 11.5219, eval/top-1-acc: 0.0012, eval/top-5-acc: 0.0077, eval/balanced_acc: 0.0010, eval/precision: 0.0020, eval/recall: 0.0010, eval/F1: 0.0006, eval/rank-1: 0.0012, eval/rank-5: 0.0077, eval/rank-10: 0.0150, eval/mAP: 0.0101, lr: 0.0004, train/prefecth_time: 0.0058 BEST_EVAL_ACC: 0.0012, at 4096 iters
+[2025-02-26 01:15:28,697 INFO] 4352 iteration USE_EMA: False, train/sup_loss: 1.4964, train/unsup_loss: 0.0501, train/total_loss: 1.5465, train/util_ratio: 0.0500, train/run_time: 1.1423, lr: 0.0004, train/prefecth_time: 0.0068 
+[2025-02-26 01:20:27,543 INFO] 4608 iteration USE_EMA: False, train/sup_loss: 4.2546, train/unsup_loss: 0.0000, train/total_loss: 4.2546, train/util_ratio: 0.0000, train/run_time: 1.1364, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 01:25:26,725 INFO] 4864 iteration USE_EMA: False, train/sup_loss: 4.0706, train/unsup_loss: 0.0000, train/total_loss: 4.0706, train/util_ratio: 0.0000, train/run_time: 1.1511, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 01:30:26,027 INFO] 5120 iteration USE_EMA: False, train/sup_loss: 5.7295, train/unsup_loss: 0.0000, train/total_loss: 5.7295, train/util_ratio: 0.0000, train/run_time: 1.1442, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 01:35:26,069 INFO] 5376 iteration USE_EMA: False, train/sup_loss: 5.1727, train/unsup_loss: 0.0000, train/total_loss: 5.1727, train/util_ratio: 0.0000, train/run_time: 1.1502, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 01:40:25,115 INFO] 5632 iteration USE_EMA: False, train/sup_loss: 3.5996, train/unsup_loss: 0.2316, train/total_loss: 3.8312, train/util_ratio: 0.0250, train/run_time: 1.1411, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 01:45:24,246 INFO] 5888 iteration USE_EMA: False, train/sup_loss: 4.1402, train/unsup_loss: 0.0000, train/total_loss: 4.1402, train/util_ratio: 0.0000, train/run_time: 1.1455, lr: 0.0005, train/prefecth_time: 0.0072 
+[2025-02-26 01:50:23,159 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 01:51:54,966 INFO] confusion matrix:
+[[0.00035663 0.         0.0053495  ... 0.         0.         0.00035663]
+ [0.         0.         0.015625   ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.03125    ... 0.03125    0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 01:52:01,426 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 01:52:10,039 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/model_best.pth
+[2025-02-26 01:52:10,040 INFO] 6144 iteration, USE_EMA: False, train/sup_loss: 4.2794, train/unsup_loss: 0.0000, train/total_loss: 4.2794, train/util_ratio: 0.0000, train/run_time: 1.1380, eval/loss: 10.4044, eval/top-1-acc: 0.0012, eval/top-5-acc: 0.0078, eval/balanced_acc: 0.0012, eval/precision: 0.0010, eval/recall: 0.0012, eval/F1: 0.0008, eval/rank-1: 0.0012, eval/rank-5: 0.0078, eval/rank-10: 0.0152, eval/mAP: 0.0103, lr: 0.0005, train/prefecth_time: 0.0059 BEST_EVAL_ACC: 0.0012, at 6144 iters
+[2025-02-26 01:57:09,828 INFO] 6400 iteration USE_EMA: False, train/sup_loss: 4.8471, train/unsup_loss: 0.0000, train/total_loss: 4.8471, train/util_ratio: 0.0000, train/run_time: 1.1502, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 02:02:09,027 INFO] 6656 iteration USE_EMA: False, train/sup_loss: 4.3674, train/unsup_loss: 0.0000, train/total_loss: 4.3674, train/util_ratio: 0.0000, train/run_time: 1.1495, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 02:07:08,153 INFO] 6912 iteration USE_EMA: False, train/sup_loss: 3.0401, train/unsup_loss: 0.0000, train/total_loss: 3.0401, train/util_ratio: 0.0000, train/run_time: 1.1515, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 02:12:07,372 INFO] 7168 iteration USE_EMA: False, train/sup_loss: 3.5395, train/unsup_loss: 0.0000, train/total_loss: 3.5395, train/util_ratio: 0.0000, train/run_time: 1.1470, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 02:17:07,366 INFO] 7424 iteration USE_EMA: False, train/sup_loss: 4.0915, train/unsup_loss: 0.0000, train/total_loss: 4.0915, train/util_ratio: 0.0000, train/run_time: 1.1451, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 02:22:06,136 INFO] 7680 iteration USE_EMA: False, train/sup_loss: 3.3048, train/unsup_loss: 0.0000, train/total_loss: 3.3048, train/util_ratio: 0.0000, train/run_time: 1.1552, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 02:27:05,110 INFO] 7936 iteration USE_EMA: False, train/sup_loss: 2.9416, train/unsup_loss: 0.0000, train/total_loss: 2.9416, train/util_ratio: 0.0000, train/run_time: 1.1469, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 02:32:04,034 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 02:33:36,426 INFO] confusion matrix:
+[[0.         0.0042796  0.00249643 ... 0.         0.00035663 0.00071327]
+ [0.         0.015625   0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.03846154 ... 0.         0.         0.        ]
+ [0.         0.         0.125      ... 0.         0.         0.        ]]
+[2025-02-26 02:33:42,876 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 02:33:42,877 INFO] 8192 iteration, USE_EMA: False, train/sup_loss: 3.5317, train/unsup_loss: 0.0000, train/total_loss: 3.5317, train/util_ratio: 0.0000, train/run_time: 1.1442, eval/loss: 11.5920, eval/top-1-acc: 0.0010, eval/top-5-acc: 0.0065, eval/balanced_acc: 0.0011, eval/precision: 0.0014, eval/recall: 0.0011, eval/F1: 0.0007, eval/rank-1: 0.0010, eval/rank-5: 0.0065, eval/rank-10: 0.0138, eval/mAP: 0.0095, lr: 0.0005, train/prefecth_time: 0.0063 BEST_EVAL_ACC: 0.0012, at 6144 iters
+[2025-02-26 02:38:43,078 INFO] 8448 iteration USE_EMA: False, train/sup_loss: 5.1812, train/unsup_loss: 0.0000, train/total_loss: 5.1812, train/util_ratio: 0.0000, train/run_time: 1.1474, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 02:43:42,414 INFO] 8704 iteration USE_EMA: False, train/sup_loss: 3.9460, train/unsup_loss: 0.0625, train/total_loss: 4.0085, train/util_ratio: 0.0250, train/run_time: 1.1357, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 02:48:41,488 INFO] 8960 iteration USE_EMA: False, train/sup_loss: 3.2319, train/unsup_loss: 0.0000, train/total_loss: 3.2319, train/util_ratio: 0.0000, train/run_time: 1.1397, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 02:53:40,556 INFO] 9216 iteration USE_EMA: False, train/sup_loss: 4.4534, train/unsup_loss: 0.0000, train/total_loss: 4.4534, train/util_ratio: 0.0000, train/run_time: 1.1552, lr: 0.0005, train/prefecth_time: 0.0059 
+[2025-02-26 02:58:40,291 INFO] 9472 iteration USE_EMA: False, train/sup_loss: 5.1192, train/unsup_loss: 0.0000, train/total_loss: 5.1192, train/util_ratio: 0.0000, train/run_time: 1.1477, lr: 0.0005, train/prefecth_time: 0.0059 
+[2025-02-26 03:03:39,319 INFO] 9728 iteration USE_EMA: False, train/sup_loss: 3.7628, train/unsup_loss: 0.0000, train/total_loss: 3.7628, train/util_ratio: 0.0000, train/run_time: 1.1506, lr: 0.0005, train/prefecth_time: 0.0088 
+[2025-02-26 03:08:38,226 INFO] 9984 iteration USE_EMA: False, train/sup_loss: 4.0258, train/unsup_loss: 0.0000, train/total_loss: 4.0258, train/util_ratio: 0.0000, train/run_time: 1.1506, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 03:13:37,330 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 03:15:08,915 INFO] confusion matrix:
+[[0.00035663 0.00035663 0.         ... 0.00071327 0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.03125    0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 03:15:15,370 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 03:15:15,372 INFO] 10240 iteration, USE_EMA: False, train/sup_loss: 4.2528, train/unsup_loss: 0.0000, train/total_loss: 4.2528, train/util_ratio: 0.0000, train/run_time: 1.1455, eval/loss: 10.3398, eval/top-1-acc: 0.0011, eval/top-5-acc: 0.0074, eval/balanced_acc: 0.0011, eval/precision: 0.0013, eval/recall: 0.0011, eval/F1: 0.0007, eval/rank-1: 0.0011, eval/rank-5: 0.0074, eval/rank-10: 0.0162, eval/mAP: 0.0103, lr: 0.0005, train/prefecth_time: 0.0063 BEST_EVAL_ACC: 0.0012, at 6144 iters
+[2025-02-26 03:20:14,728 INFO] 10496 iteration USE_EMA: False, train/sup_loss: 4.8428, train/unsup_loss: 0.0000, train/total_loss: 4.8428, train/util_ratio: 0.0000, train/run_time: 1.1498, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 03:25:13,499 INFO] 10752 iteration USE_EMA: False, train/sup_loss: 4.2810, train/unsup_loss: 0.0000, train/total_loss: 4.2810, train/util_ratio: 0.0000, train/run_time: 1.1313, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 03:30:12,106 INFO] 11008 iteration USE_EMA: False, train/sup_loss: 4.8902, train/unsup_loss: 0.0000, train/total_loss: 4.8902, train/util_ratio: 0.0000, train/run_time: 1.1394, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 03:35:10,643 INFO] 11264 iteration USE_EMA: False, train/sup_loss: 3.8614, train/unsup_loss: 0.0000, train/total_loss: 3.8614, train/util_ratio: 0.0000, train/run_time: 1.1407, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 03:40:09,823 INFO] 11520 iteration USE_EMA: False, train/sup_loss: 4.9095, train/unsup_loss: 0.0000, train/total_loss: 4.9095, train/util_ratio: 0.0000, train/run_time: 1.1362, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 03:45:08,193 INFO] 11776 iteration USE_EMA: False, train/sup_loss: 3.5925, train/unsup_loss: 0.0000, train/total_loss: 3.5925, train/util_ratio: 0.0000, train/run_time: 1.1418, lr: 0.0005, train/prefecth_time: 0.0091 
+[2025-02-26 03:50:06,487 INFO] 12032 iteration USE_EMA: False, train/sup_loss: 2.3040, train/unsup_loss: 0.0000, train/total_loss: 2.3040, train/util_ratio: 0.0000, train/run_time: 1.1355, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 03:55:04,805 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 03:56:36,180 INFO] confusion matrix:
+[[0.         0.00071327 0.00071327 ... 0.00178317 0.00035663 0.00178317]
+ [0.         0.015625   0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.03125    0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.03846154]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 03:56:42,624 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 03:56:42,626 INFO] 12288 iteration, USE_EMA: False, train/sup_loss: 2.6371, train/unsup_loss: 0.0000, train/total_loss: 2.6371, train/util_ratio: 0.0000, train/run_time: 1.1446, eval/loss: 11.7518, eval/top-1-acc: 0.0011, eval/top-5-acc: 0.0059, eval/balanced_acc: 0.0012, eval/precision: 0.0007, eval/recall: 0.0012, eval/F1: 0.0007, eval/rank-1: 0.0011, eval/rank-5: 0.0059, eval/rank-10: 0.0109, eval/mAP: 0.0087, lr: 0.0005, train/prefecth_time: 0.0062 BEST_EVAL_ACC: 0.0012, at 6144 iters
+[2025-02-26 04:01:41,995 INFO] 12544 iteration USE_EMA: False, train/sup_loss: 3.2599, train/unsup_loss: 0.0000, train/total_loss: 3.2599, train/util_ratio: 0.0000, train/run_time: 1.1333, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 04:06:40,471 INFO] 12800 iteration USE_EMA: False, train/sup_loss: 2.8765, train/unsup_loss: 0.0000, train/total_loss: 2.8765, train/util_ratio: 0.0000, train/run_time: 1.1338, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 04:11:39,052 INFO] 13056 iteration USE_EMA: False, train/sup_loss: 2.9958, train/unsup_loss: 0.0000, train/total_loss: 2.9958, train/util_ratio: 0.0000, train/run_time: 1.1386, lr: 0.0005, train/prefecth_time: 0.0092 
+[2025-02-26 04:16:37,378 INFO] 13312 iteration USE_EMA: False, train/sup_loss: 3.7537, train/unsup_loss: 0.0000, train/total_loss: 3.7537, train/util_ratio: 0.0000, train/run_time: 1.1405, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 04:21:36,457 INFO] 13568 iteration USE_EMA: False, train/sup_loss: 4.0930, train/unsup_loss: 0.0000, train/total_loss: 4.0930, train/util_ratio: 0.0000, train/run_time: 1.1404, lr: 0.0005, train/prefecth_time: 0.0092 
+[2025-02-26 04:26:34,962 INFO] 13824 iteration USE_EMA: False, train/sup_loss: 5.5392, train/unsup_loss: 0.0000, train/total_loss: 5.5392, train/util_ratio: 0.0000, train/run_time: 1.1484, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 04:31:33,440 INFO] 14080 iteration USE_EMA: False, train/sup_loss: 3.6003, train/unsup_loss: 0.0000, train/total_loss: 3.6003, train/util_ratio: 0.0000, train/run_time: 1.1424, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 04:36:31,799 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 04:38:03,467 INFO] confusion matrix:
+[[0.         0.00035663 0.         ... 0.00071327 0.         0.00249643]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 04:38:09,935 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 04:38:18,544 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/model_best.pth
+[2025-02-26 04:38:18,544 INFO] 14336 iteration, USE_EMA: False, train/sup_loss: 4.0335, train/unsup_loss: 0.0000, train/total_loss: 4.0335, train/util_ratio: 0.0000, train/run_time: 1.1334, eval/loss: 10.4891, eval/top-1-acc: 0.0014, eval/top-5-acc: 0.0067, eval/balanced_acc: 0.0018, eval/precision: 0.0009, eval/recall: 0.0018, eval/F1: 0.0011, eval/rank-1: 0.0014, eval/rank-5: 0.0067, eval/rank-10: 0.0126, eval/mAP: 0.0096, lr: 0.0005, train/prefecth_time: 0.0061 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 04:43:17,845 INFO] 14592 iteration USE_EMA: False, train/sup_loss: 4.0303, train/unsup_loss: 0.0000, train/total_loss: 4.0303, train/util_ratio: 0.0000, train/run_time: 1.1438, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 04:48:16,382 INFO] 14848 iteration USE_EMA: False, train/sup_loss: 4.0093, train/unsup_loss: 0.0000, train/total_loss: 4.0093, train/util_ratio: 0.0000, train/run_time: 1.1396, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 04:53:14,634 INFO] 15104 iteration USE_EMA: False, train/sup_loss: 5.1265, train/unsup_loss: 0.0000, train/total_loss: 5.1265, train/util_ratio: 0.0000, train/run_time: 1.1547, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 04:58:13,134 INFO] 15360 iteration USE_EMA: False, train/sup_loss: 4.0312, train/unsup_loss: 0.0000, train/total_loss: 4.0312, train/util_ratio: 0.0000, train/run_time: 1.1445, lr: 0.0005, train/prefecth_time: 0.0060 
+[2025-02-26 05:03:11,978 INFO] 15616 iteration USE_EMA: False, train/sup_loss: 4.4520, train/unsup_loss: 0.0000, train/total_loss: 4.4520, train/util_ratio: 0.0000, train/run_time: 1.1480, lr: 0.0005, train/prefecth_time: 0.0089 
+[2025-02-26 05:08:10,488 INFO] 15872 iteration USE_EMA: False, train/sup_loss: 3.0346, train/unsup_loss: 0.0000, train/total_loss: 3.0346, train/util_ratio: 0.0000, train/run_time: 1.1477, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 05:13:08,881 INFO] 16128 iteration USE_EMA: False, train/sup_loss: 2.9924, train/unsup_loss: 0.0000, train/total_loss: 2.9924, train/util_ratio: 0.0000, train/run_time: 1.1371, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 05:18:06,939 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 05:19:38,669 INFO] confusion matrix:
+[[0.00071327 0.         0.0010699  ... 0.00035663 0.         0.00035663]
+ [0.         0.         0.015625   ... 0.         0.         0.        ]
+ [0.06666667 0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.03125    0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 05:19:45,227 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 05:19:45,229 INFO] 16384 iteration, USE_EMA: False, train/sup_loss: 4.5434, train/unsup_loss: 0.0000, train/total_loss: 4.5434, train/util_ratio: 0.0000, train/run_time: 1.1419, eval/loss: 11.7301, eval/top-1-acc: 0.0012, eval/top-5-acc: 0.0066, eval/balanced_acc: 0.0014, eval/precision: 0.0011, eval/recall: 0.0014, eval/F1: 0.0008, eval/rank-1: 0.0012, eval/rank-5: 0.0066, eval/rank-10: 0.0154, eval/mAP: 0.0103, lr: 0.0005, train/prefecth_time: 0.0062 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 05:24:44,558 INFO] 16640 iteration USE_EMA: False, train/sup_loss: 3.3184, train/unsup_loss: 0.0000, train/total_loss: 3.3184, train/util_ratio: 0.0000, train/run_time: 1.1478, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 05:29:43,143 INFO] 16896 iteration USE_EMA: False, train/sup_loss: 2.5223, train/unsup_loss: 0.0000, train/total_loss: 2.5223, train/util_ratio: 0.0000, train/run_time: 1.1390, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 05:34:41,863 INFO] 17152 iteration USE_EMA: False, train/sup_loss: 2.6286, train/unsup_loss: 0.0000, train/total_loss: 2.6286, train/util_ratio: 0.0000, train/run_time: 1.1392, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 05:39:40,473 INFO] 17408 iteration USE_EMA: False, train/sup_loss: 4.0918, train/unsup_loss: 0.0000, train/total_loss: 4.0918, train/util_ratio: 0.0000, train/run_time: 1.1405, lr: 0.0005, train/prefecth_time: 0.0060 
+[2025-02-26 05:44:39,649 INFO] 17664 iteration USE_EMA: False, train/sup_loss: 3.1758, train/unsup_loss: 0.0000, train/total_loss: 3.1758, train/util_ratio: 0.0000, train/run_time: 1.1517, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 05:49:38,250 INFO] 17920 iteration USE_EMA: False, train/sup_loss: 3.3018, train/unsup_loss: 0.0000, train/total_loss: 3.3018, train/util_ratio: 0.0000, train/run_time: 1.1397, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 05:54:36,624 INFO] 18176 iteration USE_EMA: False, train/sup_loss: 2.7446, train/unsup_loss: 0.0000, train/total_loss: 2.7446, train/util_ratio: 0.0000, train/run_time: 1.1410, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 05:59:35,041 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 06:01:06,337 INFO] confusion matrix:
+[[0.         0.         0.00392297 ... 0.00035663 0.00035663 0.0021398 ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.03125    0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.125      ... 0.         0.         0.        ]]
+[2025-02-26 06:01:12,820 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 06:01:12,822 INFO] 18432 iteration, USE_EMA: False, train/sup_loss: 2.9820, train/unsup_loss: 0.0000, train/total_loss: 2.9820, train/util_ratio: 0.0000, train/run_time: 1.1384, eval/loss: 12.8954, eval/top-1-acc: 0.0010, eval/top-5-acc: 0.0055, eval/balanced_acc: 0.0011, eval/precision: 0.0011, eval/recall: 0.0011, eval/F1: 0.0008, eval/rank-1: 0.0010, eval/rank-5: 0.0055, eval/rank-10: 0.0109, eval/mAP: 0.0088, lr: 0.0005, train/prefecth_time: 0.0063 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 06:06:12,200 INFO] 18688 iteration USE_EMA: False, train/sup_loss: 2.9924, train/unsup_loss: 0.0000, train/total_loss: 2.9924, train/util_ratio: 0.0000, train/run_time: 1.1471, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 06:11:10,449 INFO] 18944 iteration USE_EMA: False, train/sup_loss: 3.4679, train/unsup_loss: 0.0000, train/total_loss: 3.4679, train/util_ratio: 0.0000, train/run_time: 1.1380, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 06:16:08,730 INFO] 19200 iteration USE_EMA: False, train/sup_loss: 2.7403, train/unsup_loss: 0.0000, train/total_loss: 2.7403, train/util_ratio: 0.0000, train/run_time: 1.1325, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 06:21:07,163 INFO] 19456 iteration USE_EMA: False, train/sup_loss: 2.9511, train/unsup_loss: 0.0000, train/total_loss: 2.9511, train/util_ratio: 0.0000, train/run_time: 1.1331, lr: 0.0005, train/prefecth_time: 0.0059 
+[2025-02-26 06:26:06,369 INFO] 19712 iteration USE_EMA: False, train/sup_loss: 3.4167, train/unsup_loss: 0.0000, train/total_loss: 3.4167, train/util_ratio: 0.0000, train/run_time: 1.1395, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 06:31:04,664 INFO] 19968 iteration USE_EMA: False, train/sup_loss: 2.9550, train/unsup_loss: 0.0000, train/total_loss: 2.9550, train/util_ratio: 0.0000, train/run_time: 1.1435, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 06:36:02,756 INFO] 20224 iteration USE_EMA: False, train/sup_loss: 2.6792, train/unsup_loss: 0.0000, train/total_loss: 2.6792, train/util_ratio: 0.0000, train/run_time: 1.1510, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 06:41:01,099 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 06:42:32,454 INFO] confusion matrix:
+[[0.         0.0021398  0.00142653 ... 0.0010699  0.0010699  0.0010699 ]
+ [0.         0.         0.         ... 0.         0.         0.015625  ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.03846154 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 06:42:39,078 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 06:42:39,079 INFO] 20480 iteration, USE_EMA: False, train/sup_loss: 3.2138, train/unsup_loss: 0.0000, train/total_loss: 3.2138, train/util_ratio: 0.0000, train/run_time: 1.1470, eval/loss: 12.9987, eval/top-1-acc: 0.0008, eval/top-5-acc: 0.0059, eval/balanced_acc: 0.0009, eval/precision: 0.0005, eval/recall: 0.0009, eval/F1: 0.0006, eval/rank-1: 0.0008, eval/rank-5: 0.0059, eval/rank-10: 0.0116, eval/mAP: 0.0089, lr: 0.0005, train/prefecth_time: 0.0061 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 06:47:38,294 INFO] 20736 iteration USE_EMA: False, train/sup_loss: 4.0174, train/unsup_loss: 0.0000, train/total_loss: 4.0174, train/util_ratio: 0.0000, train/run_time: 1.1368, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 06:52:36,926 INFO] 20992 iteration USE_EMA: False, train/sup_loss: 3.9335, train/unsup_loss: 0.0000, train/total_loss: 3.9335, train/util_ratio: 0.0000, train/run_time: 1.1441, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 06:57:35,541 INFO] 21248 iteration USE_EMA: False, train/sup_loss: 3.9916, train/unsup_loss: 0.0000, train/total_loss: 3.9916, train/util_ratio: 0.0000, train/run_time: 1.1415, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 07:02:34,470 INFO] 21504 iteration USE_EMA: False, train/sup_loss: 3.6036, train/unsup_loss: 0.0000, train/total_loss: 3.6036, train/util_ratio: 0.0000, train/run_time: 1.1371, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 07:07:33,751 INFO] 21760 iteration USE_EMA: False, train/sup_loss: 3.3968, train/unsup_loss: 0.0000, train/total_loss: 3.3968, train/util_ratio: 0.0000, train/run_time: 1.1388, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 07:12:32,218 INFO] 22016 iteration USE_EMA: False, train/sup_loss: 4.8118, train/unsup_loss: 0.0000, train/total_loss: 4.8118, train/util_ratio: 0.0000, train/run_time: 1.1509, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 07:17:30,592 INFO] 22272 iteration USE_EMA: False, train/sup_loss: 4.5506, train/unsup_loss: 0.0000, train/total_loss: 4.5506, train/util_ratio: 0.0000, train/run_time: 1.1511, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 07:22:29,017 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 07:24:00,130 INFO] confusion matrix:
+[[0.         0.00035663 0.00249643 ... 0.0021398  0.00035663 0.        ]
+ [0.         0.         0.03125    ... 0.         0.015625   0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.03125    0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 07:24:06,576 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 07:24:06,578 INFO] 22528 iteration, USE_EMA: False, train/sup_loss: 4.4550, train/unsup_loss: 0.0000, train/total_loss: 4.4550, train/util_ratio: 0.0000, train/run_time: 1.1306, eval/loss: 10.7445, eval/top-1-acc: 0.0007, eval/top-5-acc: 0.0069, eval/balanced_acc: 0.0006, eval/precision: 0.0004, eval/recall: 0.0006, eval/F1: 0.0004, eval/rank-1: 0.0007, eval/rank-5: 0.0069, eval/rank-10: 0.0137, eval/mAP: 0.0094, lr: 0.0005, train/prefecth_time: 0.0065 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 07:29:06,005 INFO] 22784 iteration USE_EMA: False, train/sup_loss: 3.7222, train/unsup_loss: 0.0000, train/total_loss: 3.7222, train/util_ratio: 0.0000, train/run_time: 1.1421, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 07:34:04,794 INFO] 23040 iteration USE_EMA: False, train/sup_loss: 3.9397, train/unsup_loss: 0.0017, train/total_loss: 3.9414, train/util_ratio: 0.0250, train/run_time: 1.1391, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 07:39:03,324 INFO] 23296 iteration USE_EMA: False, train/sup_loss: 2.6265, train/unsup_loss: 0.0000, train/total_loss: 2.6265, train/util_ratio: 0.0000, train/run_time: 1.1374, lr: 0.0005, train/prefecth_time: 0.0084 
+[2025-02-26 07:44:01,692 INFO] 23552 iteration USE_EMA: False, train/sup_loss: 4.0569, train/unsup_loss: 0.0000, train/total_loss: 4.0569, train/util_ratio: 0.0000, train/run_time: 1.1384, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 07:49:00,476 INFO] 23808 iteration USE_EMA: False, train/sup_loss: 5.8581, train/unsup_loss: 0.0000, train/total_loss: 5.8581, train/util_ratio: 0.0000, train/run_time: 1.1516, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 07:53:58,632 INFO] 24064 iteration USE_EMA: False, train/sup_loss: 4.0140, train/unsup_loss: 0.0000, train/total_loss: 4.0140, train/util_ratio: 0.0000, train/run_time: 1.1595, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 07:58:56,768 INFO] 24320 iteration USE_EMA: False, train/sup_loss: 4.1773, train/unsup_loss: 0.0000, train/total_loss: 4.1773, train/util_ratio: 0.0000, train/run_time: 1.1329, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 08:03:54,700 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 08:05:26,162 INFO] confusion matrix:
+[[0.00035663 0.00035663 0.00178317 ... 0.00071327 0.00035663 0.00071327]
+ [0.         0.015625   0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 08:05:32,622 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 08:05:32,623 INFO] 24576 iteration, USE_EMA: False, train/sup_loss: 3.7022, train/unsup_loss: 0.0000, train/total_loss: 3.7022, train/util_ratio: 0.0000, train/run_time: 1.1327, eval/loss: 10.5043, eval/top-1-acc: 0.0010, eval/top-5-acc: 0.0059, eval/balanced_acc: 0.0013, eval/precision: 0.0018, eval/recall: 0.0013, eval/F1: 0.0008, eval/rank-1: 0.0010, eval/rank-5: 0.0059, eval/rank-10: 0.0119, eval/mAP: 0.0089, lr: 0.0005, train/prefecth_time: 0.0060 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 08:10:32,086 INFO] 24832 iteration USE_EMA: False, train/sup_loss: 4.6717, train/unsup_loss: 0.0000, train/total_loss: 4.6717, train/util_ratio: 0.0000, train/run_time: 1.1436, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 08:15:30,658 INFO] 25088 iteration USE_EMA: False, train/sup_loss: 3.8998, train/unsup_loss: 0.0000, train/total_loss: 3.8998, train/util_ratio: 0.0000, train/run_time: 1.1398, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 08:20:29,294 INFO] 25344 iteration USE_EMA: False, train/sup_loss: 3.9028, train/unsup_loss: 0.0000, train/total_loss: 3.9028, train/util_ratio: 0.0000, train/run_time: 1.1455, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 08:25:27,893 INFO] 25600 iteration USE_EMA: False, train/sup_loss: 5.9214, train/unsup_loss: 0.0000, train/total_loss: 5.9214, train/util_ratio: 0.0000, train/run_time: 1.1290, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 08:30:27,082 INFO] 25856 iteration USE_EMA: False, train/sup_loss: 4.5210, train/unsup_loss: 0.0000, train/total_loss: 4.5210, train/util_ratio: 0.0000, train/run_time: 1.1394, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 08:35:25,857 INFO] 26112 iteration USE_EMA: False, train/sup_loss: 3.5034, train/unsup_loss: 0.0000, train/total_loss: 3.5034, train/util_ratio: 0.0000, train/run_time: 1.1485, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 08:40:24,427 INFO] 26368 iteration USE_EMA: False, train/sup_loss: 3.9500, train/unsup_loss: 0.0000, train/total_loss: 3.9500, train/util_ratio: 0.0000, train/run_time: 1.1345, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 08:45:23,055 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 08:46:54,352 INFO] confusion matrix:
+[[0.         0.00035663 0.0010699  ... 0.0021398  0.         0.00142653]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.03125    0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 08:47:00,848 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 08:47:00,850 INFO] 26624 iteration, USE_EMA: False, train/sup_loss: 4.2578, train/unsup_loss: 0.0000, train/total_loss: 4.2578, train/util_ratio: 0.0000, train/run_time: 1.1422, eval/loss: 9.6832, eval/top-1-acc: 0.0008, eval/top-5-acc: 0.0051, eval/balanced_acc: 0.0010, eval/precision: 0.0003, eval/recall: 0.0010, eval/F1: 0.0004, eval/rank-1: 0.0008, eval/rank-5: 0.0051, eval/rank-10: 0.0116, eval/mAP: 0.0085, lr: 0.0005, train/prefecth_time: 0.0061 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 08:52:00,408 INFO] 26880 iteration USE_EMA: False, train/sup_loss: 5.2829, train/unsup_loss: 0.0000, train/total_loss: 5.2829, train/util_ratio: 0.0000, train/run_time: 1.1515, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 08:56:59,174 INFO] 27136 iteration USE_EMA: False, train/sup_loss: 3.5496, train/unsup_loss: 0.0000, train/total_loss: 3.5496, train/util_ratio: 0.0000, train/run_time: 1.1457, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 09:01:57,713 INFO] 27392 iteration USE_EMA: False, train/sup_loss: 3.4443, train/unsup_loss: 0.0000, train/total_loss: 3.4443, train/util_ratio: 0.0000, train/run_time: 1.1426, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 09:06:56,471 INFO] 27648 iteration USE_EMA: False, train/sup_loss: 5.0515, train/unsup_loss: 0.0000, train/total_loss: 5.0515, train/util_ratio: 0.0000, train/run_time: 1.1460, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 09:11:55,735 INFO] 27904 iteration USE_EMA: False, train/sup_loss: 3.5583, train/unsup_loss: 0.0000, train/total_loss: 3.5583, train/util_ratio: 0.0000, train/run_time: 1.1541, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 09:16:54,095 INFO] 28160 iteration USE_EMA: False, train/sup_loss: 4.2509, train/unsup_loss: 0.0000, train/total_loss: 4.2509, train/util_ratio: 0.0000, train/run_time: 1.1458, lr: 0.0005, train/prefecth_time: 0.0070 
+[2025-02-26 09:21:52,774 INFO] 28416 iteration USE_EMA: False, train/sup_loss: 3.6820, train/unsup_loss: 0.0000, train/total_loss: 3.6820, train/util_ratio: 0.0000, train/run_time: 1.1378, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 09:26:51,291 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 09:28:22,749 INFO] confusion matrix:
+[[0.         0.00035663 0.00035663 ... 0.         0.         0.00035663]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 09:28:29,234 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 09:28:29,235 INFO] 28672 iteration, USE_EMA: False, train/sup_loss: 6.4763, train/unsup_loss: 0.0000, train/total_loss: 6.4763, train/util_ratio: 0.0000, train/run_time: 1.1371, eval/loss: 8.7858, eval/top-1-acc: 0.0010, eval/top-5-acc: 0.0066, eval/balanced_acc: 0.0012, eval/precision: 0.0003, eval/recall: 0.0012, eval/F1: 0.0004, eval/rank-1: 0.0010, eval/rank-5: 0.0066, eval/rank-10: 0.0137, eval/mAP: 0.0095, lr: 0.0005, train/prefecth_time: 0.0058 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 09:33:28,665 INFO] 28928 iteration USE_EMA: False, train/sup_loss: 3.9242, train/unsup_loss: 0.0000, train/total_loss: 3.9242, train/util_ratio: 0.0000, train/run_time: 1.1389, lr: 0.0005, train/prefecth_time: 0.0057 
+[2025-02-26 09:38:26,834 INFO] 29184 iteration USE_EMA: False, train/sup_loss: 4.4007, train/unsup_loss: 0.0000, train/total_loss: 4.4007, train/util_ratio: 0.0000, train/run_time: 1.1399, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 09:43:25,177 INFO] 29440 iteration USE_EMA: False, train/sup_loss: 3.6518, train/unsup_loss: 0.0000, train/total_loss: 3.6518, train/util_ratio: 0.0000, train/run_time: 1.1394, lr: 0.0005, train/prefecth_time: 0.0059 
+[2025-02-26 09:48:23,924 INFO] 29696 iteration USE_EMA: False, train/sup_loss: 5.7501, train/unsup_loss: 0.0000, train/total_loss: 5.7501, train/util_ratio: 0.0000, train/run_time: 1.1451, lr: 0.0005, train/prefecth_time: 0.0057 
+[2025-02-26 09:53:23,259 INFO] 29952 iteration USE_EMA: False, train/sup_loss: 4.7287, train/unsup_loss: 0.0000, train/total_loss: 4.7287, train/util_ratio: 0.0000, train/run_time: 1.1443, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 09:58:21,599 INFO] 30208 iteration USE_EMA: False, train/sup_loss: 3.8383, train/unsup_loss: 0.0000, train/total_loss: 3.8383, train/util_ratio: 0.0000, train/run_time: 1.1311, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 10:03:20,046 INFO] 30464 iteration USE_EMA: False, train/sup_loss: 4.8577, train/unsup_loss: 0.0000, train/total_loss: 4.8577, train/util_ratio: 0.0000, train/run_time: 1.1385, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 10:08:18,398 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 10:09:49,675 INFO] confusion matrix:
+[[0.         0.00998573 0.0010699  ... 0.00035663 0.         0.00285307]
+ [0.         0.03125    0.015625   ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.03125    0.         ... 0.         0.         0.        ]
+ [0.         0.03846154 0.03846154 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 10:09:56,122 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 10:09:56,124 INFO] 30720 iteration, USE_EMA: False, train/sup_loss: 4.6921, train/unsup_loss: 0.0000, train/total_loss: 4.6921, train/util_ratio: 0.0000, train/run_time: 1.1378, eval/loss: 9.3079, eval/top-1-acc: 0.0008, eval/top-5-acc: 0.0051, eval/balanced_acc: 0.0008, eval/precision: 0.0004, eval/recall: 0.0008, eval/F1: 0.0004, eval/rank-1: 0.0008, eval/rank-5: 0.0051, eval/rank-10: 0.0112, eval/mAP: 0.0085, lr: 0.0005, train/prefecth_time: 0.0058 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 10:14:55,348 INFO] 30976 iteration USE_EMA: False, train/sup_loss: 4.7015, train/unsup_loss: 0.0000, train/total_loss: 4.7015, train/util_ratio: 0.0000, train/run_time: 1.1473, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 10:19:53,742 INFO] 31232 iteration USE_EMA: False, train/sup_loss: 3.1850, train/unsup_loss: 0.0000, train/total_loss: 3.1850, train/util_ratio: 0.0000, train/run_time: 1.1378, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 10:24:52,329 INFO] 31488 iteration USE_EMA: False, train/sup_loss: 3.8546, train/unsup_loss: 0.0000, train/total_loss: 3.8546, train/util_ratio: 0.0000, train/run_time: 1.1318, lr: 0.0005, train/prefecth_time: 0.0070 
+[2025-02-26 10:29:50,685 INFO] 31744 iteration USE_EMA: False, train/sup_loss: 4.4363, train/unsup_loss: 0.0000, train/total_loss: 4.4363, train/util_ratio: 0.0000, train/run_time: 1.1386, lr: 0.0005, train/prefecth_time: 0.0059 
+[2025-02-26 10:34:50,043 INFO] 32000 iteration USE_EMA: False, train/sup_loss: 4.3737, train/unsup_loss: 0.0000, train/total_loss: 4.3737, train/util_ratio: 0.0000, train/run_time: 1.1502, lr: 0.0005, train/prefecth_time: 0.0058 
+[2025-02-26 10:39:48,584 INFO] 32256 iteration USE_EMA: False, train/sup_loss: 4.0886, train/unsup_loss: 0.0000, train/total_loss: 4.0886, train/util_ratio: 0.0000, train/run_time: 1.1468, lr: 0.0005, train/prefecth_time: 0.0094 
+[2025-02-26 10:44:47,323 INFO] 32512 iteration USE_EMA: False, train/sup_loss: 4.7406, train/unsup_loss: 0.0000, train/total_loss: 4.7406, train/util_ratio: 0.0000, train/run_time: 1.1456, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 10:49:46,213 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 10:51:18,282 INFO] confusion matrix:
+[[0.         0.         0.00035663 ... 0.00071327 0.         0.00071327]
+ [0.         0.         0.         ... 0.         0.         0.015625  ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 10:51:24,737 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 10:51:24,739 INFO] 32768 iteration, USE_EMA: False, train/sup_loss: 4.2343, train/unsup_loss: 0.0000, train/total_loss: 4.2343, train/util_ratio: 0.0000, train/run_time: 1.1390, eval/loss: 9.9197, eval/top-1-acc: 0.0011, eval/top-5-acc: 0.0067, eval/balanced_acc: 0.0013, eval/precision: 0.0009, eval/recall: 0.0013, eval/F1: 0.0009, eval/rank-1: 0.0011, eval/rank-5: 0.0067, eval/rank-10: 0.0129, eval/mAP: 0.0095, lr: 0.0005, train/prefecth_time: 0.0061 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 10:56:23,825 INFO] 33024 iteration USE_EMA: False, train/sup_loss: 4.9795, train/unsup_loss: 0.0000, train/total_loss: 4.9795, train/util_ratio: 0.0000, train/run_time: 1.1278, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 11:01:22,027 INFO] 33280 iteration USE_EMA: False, train/sup_loss: 4.3217, train/unsup_loss: 0.0000, train/total_loss: 4.3217, train/util_ratio: 0.0000, train/run_time: 1.1351, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 11:06:20,324 INFO] 33536 iteration USE_EMA: False, train/sup_loss: 4.3549, train/unsup_loss: 0.0000, train/total_loss: 4.3549, train/util_ratio: 0.0000, train/run_time: 1.1334, lr: 0.0005, train/prefecth_time: 0.0075 
+[2025-02-26 11:11:18,440 INFO] 33792 iteration USE_EMA: False, train/sup_loss: 5.4057, train/unsup_loss: 0.0000, train/total_loss: 5.4057, train/util_ratio: 0.0000, train/run_time: 1.1369, lr: 0.0005, train/prefecth_time: 0.0057 
+[2025-02-26 11:16:17,299 INFO] 34048 iteration USE_EMA: False, train/sup_loss: 4.4787, train/unsup_loss: 0.0000, train/total_loss: 4.4787, train/util_ratio: 0.0000, train/run_time: 1.1368, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 11:21:15,617 INFO] 34304 iteration USE_EMA: False, train/sup_loss: 4.5531, train/unsup_loss: 0.0000, train/total_loss: 4.5531, train/util_ratio: 0.0000, train/run_time: 1.1487, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 11:26:14,120 INFO] 34560 iteration USE_EMA: False, train/sup_loss: 4.3611, train/unsup_loss: 0.0000, train/total_loss: 4.3611, train/util_ratio: 0.0000, train/run_time: 1.1512, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 11:31:12,254 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 11:32:43,815 INFO] confusion matrix:
+[[0.         0.         0.00071327 ... 0.00035663 0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.03846154]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 11:32:50,262 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 11:32:50,264 INFO] 34816 iteration, USE_EMA: False, train/sup_loss: 4.3962, train/unsup_loss: 0.0000, train/total_loss: 4.3962, train/util_ratio: 0.0000, train/run_time: 1.1325, eval/loss: 10.3777, eval/top-1-acc: 0.0012, eval/top-5-acc: 0.0061, eval/balanced_acc: 0.0014, eval/precision: 0.0021, eval/recall: 0.0014, eval/F1: 0.0009, eval/rank-1: 0.0012, eval/rank-5: 0.0061, eval/rank-10: 0.0118, eval/mAP: 0.0093, lr: 0.0005, train/prefecth_time: 0.0064 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 11:37:49,166 INFO] 35072 iteration USE_EMA: False, train/sup_loss: 4.0954, train/unsup_loss: 0.0000, train/total_loss: 4.0954, train/util_ratio: 0.0000, train/run_time: 1.1342, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 11:42:47,365 INFO] 35328 iteration USE_EMA: False, train/sup_loss: 3.8784, train/unsup_loss: 0.0000, train/total_loss: 3.8784, train/util_ratio: 0.0000, train/run_time: 1.1384, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 11:47:45,506 INFO] 35584 iteration USE_EMA: False, train/sup_loss: 4.9656, train/unsup_loss: 0.0000, train/total_loss: 4.9656, train/util_ratio: 0.0000, train/run_time: 1.1462, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 11:52:43,769 INFO] 35840 iteration USE_EMA: False, train/sup_loss: 5.4874, train/unsup_loss: 0.0000, train/total_loss: 5.4874, train/util_ratio: 0.0000, train/run_time: 1.1338, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 11:57:42,647 INFO] 36096 iteration USE_EMA: False, train/sup_loss: 4.7204, train/unsup_loss: 0.0000, train/total_loss: 4.7204, train/util_ratio: 0.0000, train/run_time: 1.1415, lr: 0.0005, train/prefecth_time: 0.0090 
+[2025-02-26 12:02:40,826 INFO] 36352 iteration USE_EMA: False, train/sup_loss: 5.5057, train/unsup_loss: 0.0000, train/total_loss: 5.5057, train/util_ratio: 0.0000, train/run_time: 1.1363, lr: 0.0005, train/prefecth_time: 0.0070 
+[2025-02-26 12:07:39,220 INFO] 36608 iteration USE_EMA: False, train/sup_loss: 4.5438, train/unsup_loss: 0.0000, train/total_loss: 4.5438, train/util_ratio: 0.0000, train/run_time: 1.1397, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 12:12:37,236 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 12:14:08,747 INFO] confusion matrix:
+[[0.         0.00071327 0.00249643 ... 0.         0.00142653 0.0010699 ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 12:14:15,191 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 12:14:15,193 INFO] 36864 iteration, USE_EMA: False, train/sup_loss: 4.0950, train/unsup_loss: 0.0000, train/total_loss: 4.0950, train/util_ratio: 0.0000, train/run_time: 1.1369, eval/loss: 10.6687, eval/top-1-acc: 0.0011, eval/top-5-acc: 0.0058, eval/balanced_acc: 0.0014, eval/precision: 0.0022, eval/recall: 0.0014, eval/F1: 0.0009, eval/rank-1: 0.0011, eval/rank-5: 0.0058, eval/rank-10: 0.0114, eval/mAP: 0.0090, lr: 0.0005, train/prefecth_time: 0.0064 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 12:19:14,593 INFO] 37120 iteration USE_EMA: False, train/sup_loss: 4.9113, train/unsup_loss: 0.0000, train/total_loss: 4.9113, train/util_ratio: 0.0000, train/run_time: 1.1447, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 12:24:13,301 INFO] 37376 iteration USE_EMA: False, train/sup_loss: 7.1327, train/unsup_loss: 0.0000, train/total_loss: 7.1327, train/util_ratio: 0.0000, train/run_time: 1.1420, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 12:29:12,080 INFO] 37632 iteration USE_EMA: False, train/sup_loss: 3.4554, train/unsup_loss: 0.0000, train/total_loss: 3.4554, train/util_ratio: 0.0000, train/run_time: 1.1308, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 12:34:10,748 INFO] 37888 iteration USE_EMA: False, train/sup_loss: 3.3791, train/unsup_loss: 0.0000, train/total_loss: 3.3791, train/util_ratio: 0.0000, train/run_time: 1.1394, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 12:39:10,180 INFO] 38144 iteration USE_EMA: False, train/sup_loss: 5.4642, train/unsup_loss: 0.0000, train/total_loss: 5.4642, train/util_ratio: 0.0000, train/run_time: 1.1356, lr: 0.0005, train/prefecth_time: 0.0060 
+[2025-02-26 12:44:08,811 INFO] 38400 iteration USE_EMA: False, train/sup_loss: 4.4003, train/unsup_loss: 0.0000, train/total_loss: 4.4003, train/util_ratio: 0.0000, train/run_time: 1.1370, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 12:49:07,316 INFO] 38656 iteration USE_EMA: False, train/sup_loss: 4.4530, train/unsup_loss: 0.0000, train/total_loss: 4.4530, train/util_ratio: 0.0000, train/run_time: 1.1470, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 12:54:06,017 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 12:55:37,957 INFO] confusion matrix:
+[[0.         0.00071327 0.00142653 ... 0.00071327 0.         0.00249643]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.03125    0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 12:55:44,445 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 12:55:44,446 INFO] 38912 iteration, USE_EMA: False, train/sup_loss: 4.3061, train/unsup_loss: 0.0000, train/total_loss: 4.3061, train/util_ratio: 0.0000, train/run_time: 1.1247, eval/loss: 10.7225, eval/top-1-acc: 0.0013, eval/top-5-acc: 0.0062, eval/balanced_acc: 0.0017, eval/precision: 0.0009, eval/recall: 0.0017, eval/F1: 0.0010, eval/rank-1: 0.0013, eval/rank-5: 0.0062, eval/rank-10: 0.0133, eval/mAP: 0.0096, lr: 0.0005, train/prefecth_time: 0.0057 BEST_EVAL_ACC: 0.0014, at 14336 iters
+[2025-02-26 13:00:44,022 INFO] 39168 iteration USE_EMA: False, train/sup_loss: 4.7156, train/unsup_loss: 0.0000, train/total_loss: 4.7156, train/util_ratio: 0.0000, train/run_time: 1.1297, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 13:05:42,799 INFO] 39424 iteration USE_EMA: False, train/sup_loss: 4.5217, train/unsup_loss: 0.0000, train/total_loss: 4.5217, train/util_ratio: 0.0000, train/run_time: 1.1421, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 13:10:41,389 INFO] 39680 iteration USE_EMA: False, train/sup_loss: 4.3304, train/unsup_loss: 0.0000, train/total_loss: 4.3304, train/util_ratio: 0.0000, train/run_time: 1.1489, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 13:15:40,167 INFO] 39936 iteration USE_EMA: False, train/sup_loss: 5.3032, train/unsup_loss: 0.0000, train/total_loss: 5.3032, train/util_ratio: 0.0000, train/run_time: 1.1483, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 13:20:39,574 INFO] 40192 iteration USE_EMA: False, train/sup_loss: 3.6795, train/unsup_loss: 0.0000, train/total_loss: 3.6795, train/util_ratio: 0.0000, train/run_time: 1.1367, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 13:25:38,109 INFO] 40448 iteration USE_EMA: False, train/sup_loss: 3.4458, train/unsup_loss: 0.0000, train/total_loss: 3.4458, train/util_ratio: 0.0000, train/run_time: 1.1466, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 13:30:36,837 INFO] 40704 iteration USE_EMA: False, train/sup_loss: 3.6994, train/unsup_loss: 0.0000, train/total_loss: 3.6994, train/util_ratio: 0.0000, train/run_time: 1.1427, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 13:35:35,591 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 13:37:07,243 INFO] confusion matrix:
+[[0.00142653 0.00071327 0.00035663 ... 0.00035663 0.00035663 0.00035663]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 13:37:13,766 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 13:37:22,375 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/model_best.pth
+[2025-02-26 13:37:22,376 INFO] 40960 iteration, USE_EMA: False, train/sup_loss: 3.3426, train/unsup_loss: 0.0000, train/total_loss: 3.3426, train/util_ratio: 0.0000, train/run_time: 1.1434, eval/loss: 12.2063, eval/top-1-acc: 0.0015, eval/top-5-acc: 0.0062, eval/balanced_acc: 0.0014, eval/precision: 0.0013, eval/recall: 0.0014, eval/F1: 0.0010, eval/rank-1: 0.0015, eval/rank-5: 0.0062, eval/rank-10: 0.0125, eval/mAP: 0.0096, lr: 0.0005, train/prefecth_time: 0.0061 BEST_EVAL_ACC: 0.0015, at 40960 iters
+[2025-02-26 13:42:21,564 INFO] 41216 iteration USE_EMA: False, train/sup_loss: 5.7103, train/unsup_loss: 0.0000, train/total_loss: 5.7103, train/util_ratio: 0.0000, train/run_time: 1.1272, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 13:47:20,233 INFO] 41472 iteration USE_EMA: False, train/sup_loss: 4.3836, train/unsup_loss: 0.0000, train/total_loss: 4.3836, train/util_ratio: 0.0000, train/run_time: 1.1465, lr: 0.0005, train/prefecth_time: 0.0075 
+[2025-02-26 13:52:19,129 INFO] 41728 iteration USE_EMA: False, train/sup_loss: 3.7410, train/unsup_loss: 0.0000, train/total_loss: 3.7410, train/util_ratio: 0.0000, train/run_time: 1.1467, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 13:57:17,910 INFO] 41984 iteration USE_EMA: False, train/sup_loss: 3.1876, train/unsup_loss: 0.0000, train/total_loss: 3.1876, train/util_ratio: 0.0000, train/run_time: 1.1478, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 14:02:17,379 INFO] 42240 iteration USE_EMA: False, train/sup_loss: 4.8723, train/unsup_loss: 0.0000, train/total_loss: 4.8723, train/util_ratio: 0.0000, train/run_time: 1.1427, lr: 0.0005, train/prefecth_time: 0.0060 
+[2025-02-26 14:07:16,312 INFO] 42496 iteration USE_EMA: False, train/sup_loss: 5.2716, train/unsup_loss: 0.0000, train/total_loss: 5.2716, train/util_ratio: 0.0000, train/run_time: 1.1372, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 14:12:15,256 INFO] 42752 iteration USE_EMA: False, train/sup_loss: 4.9201, train/unsup_loss: 0.0000, train/total_loss: 4.9201, train/util_ratio: 0.0000, train/run_time: 1.1505, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 14:17:14,251 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 14:18:45,954 INFO] confusion matrix:
+[[0.         0.0010699  0.0021398  ... 0.00178317 0.         0.00142653]
+ [0.         0.         0.015625   ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 14:18:52,442 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 14:18:52,444 INFO] 43008 iteration, USE_EMA: False, train/sup_loss: 4.5913, train/unsup_loss: 0.0000, train/total_loss: 4.5913, train/util_ratio: 0.0000, train/run_time: 1.1464, eval/loss: 9.2668, eval/top-1-acc: 0.0013, eval/top-5-acc: 0.0071, eval/balanced_acc: 0.0016, eval/precision: 0.0027, eval/recall: 0.0016, eval/F1: 0.0011, eval/rank-1: 0.0013, eval/rank-5: 0.0071, eval/rank-10: 0.0148, eval/mAP: 0.0100, lr: 0.0005, train/prefecth_time: 0.0066 BEST_EVAL_ACC: 0.0015, at 40960 iters
+[2025-02-26 14:23:51,333 INFO] 43264 iteration USE_EMA: False, train/sup_loss: 5.0449, train/unsup_loss: 0.0000, train/total_loss: 5.0449, train/util_ratio: 0.0000, train/run_time: 1.1461, lr: 0.0005, train/prefecth_time: 0.0074 
+[2025-02-26 14:28:49,430 INFO] 43520 iteration USE_EMA: False, train/sup_loss: 4.1398, train/unsup_loss: 0.0000, train/total_loss: 4.1398, train/util_ratio: 0.0000, train/run_time: 1.1353, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 14:33:47,612 INFO] 43776 iteration USE_EMA: False, train/sup_loss: 4.2432, train/unsup_loss: 0.3271, train/total_loss: 4.5704, train/util_ratio: 0.0250, train/run_time: 1.1442, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 14:38:45,721 INFO] 44032 iteration USE_EMA: False, train/sup_loss: 4.3351, train/unsup_loss: 0.0000, train/total_loss: 4.3351, train/util_ratio: 0.0000, train/run_time: 1.1278, lr: 0.0005, train/prefecth_time: 0.0059 
+[2025-02-26 14:43:45,413 INFO] 44288 iteration USE_EMA: False, train/sup_loss: 2.8587, train/unsup_loss: 0.0000, train/total_loss: 2.8587, train/util_ratio: 0.0000, train/run_time: 1.1523, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 14:48:44,128 INFO] 44544 iteration USE_EMA: False, train/sup_loss: 5.1972, train/unsup_loss: 0.0000, train/total_loss: 5.1972, train/util_ratio: 0.0000, train/run_time: 1.1464, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 14:53:43,008 INFO] 44800 iteration USE_EMA: False, train/sup_loss: 3.8357, train/unsup_loss: 0.0000, train/total_loss: 3.8357, train/util_ratio: 0.0000, train/run_time: 1.1429, lr: 0.0005, train/prefecth_time: 0.0097 
+[2025-02-26 14:58:41,505 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 15:00:13,527 INFO] confusion matrix:
+[[0.         0.00035663 0.00463623 ... 0.00142653 0.         0.0010699 ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.03846154 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 15:00:20,042 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 15:00:20,044 INFO] 45056 iteration, USE_EMA: False, train/sup_loss: 3.8330, train/unsup_loss: 0.0000, train/total_loss: 3.8330, train/util_ratio: 0.0000, train/run_time: 1.1364, eval/loss: 10.9330, eval/top-1-acc: 0.0010, eval/top-5-acc: 0.0053, eval/balanced_acc: 0.0011, eval/precision: 0.0005, eval/recall: 0.0011, eval/F1: 0.0006, eval/rank-1: 0.0010, eval/rank-5: 0.0053, eval/rank-10: 0.0117, eval/mAP: 0.0088, lr: 0.0005, train/prefecth_time: 0.0064 BEST_EVAL_ACC: 0.0015, at 40960 iters
+[2025-02-26 15:05:19,564 INFO] 45312 iteration USE_EMA: False, train/sup_loss: 3.5386, train/unsup_loss: 0.0000, train/total_loss: 3.5386, train/util_ratio: 0.0000, train/run_time: 1.1415, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 15:10:17,989 INFO] 45568 iteration USE_EMA: False, train/sup_loss: 3.0201, train/unsup_loss: 0.0000, train/total_loss: 3.0201, train/util_ratio: 0.0000, train/run_time: 1.1409, lr: 0.0005, train/prefecth_time: 0.0073 
+[2025-02-26 15:15:16,408 INFO] 45824 iteration USE_EMA: False, train/sup_loss: 4.2633, train/unsup_loss: 0.0000, train/total_loss: 4.2633, train/util_ratio: 0.0000, train/run_time: 1.1335, lr: 0.0005, train/prefecth_time: 0.0091 
+[2025-02-26 15:20:14,583 INFO] 46080 iteration USE_EMA: False, train/sup_loss: 4.6595, train/unsup_loss: 0.0000, train/total_loss: 4.6595, train/util_ratio: 0.0000, train/run_time: 1.1300, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 15:25:13,618 INFO] 46336 iteration USE_EMA: False, train/sup_loss: 3.1133, train/unsup_loss: 0.0000, train/total_loss: 3.1133, train/util_ratio: 0.0000, train/run_time: 1.1367, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 15:30:11,784 INFO] 46592 iteration USE_EMA: False, train/sup_loss: 4.9792, train/unsup_loss: 0.0000, train/total_loss: 4.9792, train/util_ratio: 0.0000, train/run_time: 1.1427, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 15:35:09,911 INFO] 46848 iteration USE_EMA: False, train/sup_loss: 4.8762, train/unsup_loss: 0.0000, train/total_loss: 4.8762, train/util_ratio: 0.0000, train/run_time: 1.1313, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 15:40:08,097 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 15:41:39,876 INFO] confusion matrix:
+[[0.         0.0042796  0.         ... 0.         0.         0.00713267]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 15:41:46,406 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 15:41:46,408 INFO] 47104 iteration, USE_EMA: False, train/sup_loss: 4.4983, train/unsup_loss: 0.0000, train/total_loss: 4.4983, train/util_ratio: 0.0000, train/run_time: 1.1369, eval/loss: 11.1902, eval/top-1-acc: 0.0011, eval/top-5-acc: 0.0065, eval/balanced_acc: 0.0013, eval/precision: 0.0020, eval/recall: 0.0013, eval/F1: 0.0009, eval/rank-1: 0.0011, eval/rank-5: 0.0065, eval/rank-10: 0.0123, eval/mAP: 0.0094, lr: 0.0005, train/prefecth_time: 0.0058 BEST_EVAL_ACC: 0.0015, at 40960 iters
+[2025-02-26 15:46:45,431 INFO] 47360 iteration USE_EMA: False, train/sup_loss: 4.8958, train/unsup_loss: 0.0000, train/total_loss: 4.8958, train/util_ratio: 0.0000, train/run_time: 1.1399, lr: 0.0005, train/prefecth_time: 0.0072 
+[2025-02-26 15:51:43,348 INFO] 47616 iteration USE_EMA: False, train/sup_loss: 3.7365, train/unsup_loss: 0.0000, train/total_loss: 3.7365, train/util_ratio: 0.0000, train/run_time: 1.1394, lr: 0.0005, train/prefecth_time: 0.0070 
+[2025-02-26 15:56:41,686 INFO] 47872 iteration USE_EMA: False, train/sup_loss: 3.4888, train/unsup_loss: 0.0000, train/total_loss: 3.4888, train/util_ratio: 0.0000, train/run_time: 1.1386, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 16:01:39,727 INFO] 48128 iteration USE_EMA: False, train/sup_loss: 3.9071, train/unsup_loss: 0.0000, train/total_loss: 3.9071, train/util_ratio: 0.0000, train/run_time: 1.1364, lr: 0.0005, train/prefecth_time: 0.0059 
+[2025-02-26 16:06:38,588 INFO] 48384 iteration USE_EMA: False, train/sup_loss: 3.5382, train/unsup_loss: 0.0000, train/total_loss: 3.5382, train/util_ratio: 0.0000, train/run_time: 1.1400, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 16:11:36,954 INFO] 48640 iteration USE_EMA: False, train/sup_loss: 3.9949, train/unsup_loss: 0.0000, train/total_loss: 3.9949, train/util_ratio: 0.0000, train/run_time: 1.1414, lr: 0.0005, train/prefecth_time: 0.0095 
+[2025-02-26 16:16:35,481 INFO] 48896 iteration USE_EMA: False, train/sup_loss: 4.4233, train/unsup_loss: 0.0000, train/total_loss: 4.4233, train/util_ratio: 0.0000, train/run_time: 1.1219, lr: 0.0005, train/prefecth_time: 0.0072 
+[2025-02-26 16:21:33,507 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 16:23:05,270 INFO] confusion matrix:
+[[0.         0.00142653 0.0021398  ... 0.00142653 0.00071327 0.00142653]
+ [0.         0.015625   0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 16:23:11,729 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 16:23:18,244 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/model_best.pth
+[2025-02-26 16:23:18,246 INFO] 49152 iteration, USE_EMA: False, train/sup_loss: 4.1763, train/unsup_loss: 0.0000, train/total_loss: 4.1763, train/util_ratio: 0.0000, train/run_time: 1.1400, eval/loss: 11.6928, eval/top-1-acc: 0.0016, eval/top-5-acc: 0.0059, eval/balanced_acc: 0.0017, eval/precision: 0.0014, eval/recall: 0.0017, eval/F1: 0.0013, eval/rank-1: 0.0016, eval/rank-5: 0.0059, eval/rank-10: 0.0122, eval/mAP: 0.0095, lr: 0.0005, train/prefecth_time: 0.0064 BEST_EVAL_ACC: 0.0016, at 49152 iters
+[2025-02-26 16:28:17,255 INFO] 49408 iteration USE_EMA: False, train/sup_loss: 5.4473, train/unsup_loss: 0.0000, train/total_loss: 5.4473, train/util_ratio: 0.0000, train/run_time: 1.1375, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 16:33:15,508 INFO] 49664 iteration USE_EMA: False, train/sup_loss: 2.8833, train/unsup_loss: 0.0000, train/total_loss: 2.8833, train/util_ratio: 0.0000, train/run_time: 1.1433, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 16:38:13,649 INFO] 49920 iteration USE_EMA: False, train/sup_loss: 3.6064, train/unsup_loss: 0.0000, train/total_loss: 3.6064, train/util_ratio: 0.0000, train/run_time: 1.1411, lr: 0.0005, train/prefecth_time: 0.0064 
+[2025-02-26 16:43:12,023 INFO] 50176 iteration USE_EMA: False, train/sup_loss: 4.0150, train/unsup_loss: 0.0000, train/total_loss: 4.0150, train/util_ratio: 0.0000, train/run_time: 1.1395, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 16:48:11,175 INFO] 50432 iteration USE_EMA: False, train/sup_loss: 2.9849, train/unsup_loss: 0.0000, train/total_loss: 2.9849, train/util_ratio: 0.0000, train/run_time: 1.1318, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 16:53:09,650 INFO] 50688 iteration USE_EMA: False, train/sup_loss: 5.0108, train/unsup_loss: 0.0000, train/total_loss: 5.0108, train/util_ratio: 0.0000, train/run_time: 1.1278, lr: 0.0005, train/prefecth_time: 0.0070 
+[2025-02-26 16:58:08,167 INFO] 50944 iteration USE_EMA: False, train/sup_loss: 5.4289, train/unsup_loss: 0.0000, train/total_loss: 5.4289, train/util_ratio: 0.0000, train/run_time: 1.1436, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 17:03:06,642 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 17:04:38,600 INFO] confusion matrix:
+[[0.00035663 0.00463623 0.         ... 0.00035663 0.         0.        ]
+ [0.         0.015625   0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 17:04:45,066 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 17:04:45,068 INFO] 51200 iteration, USE_EMA: False, train/sup_loss: 5.0523, train/unsup_loss: 0.0000, train/total_loss: 5.0523, train/util_ratio: 0.0000, train/run_time: 1.1380, eval/loss: 8.6368, eval/top-1-acc: 0.0009, eval/top-5-acc: 0.0060, eval/balanced_acc: 0.0009, eval/precision: 0.0007, eval/recall: 0.0009, eval/F1: 0.0006, eval/rank-1: 0.0009, eval/rank-5: 0.0060, eval/rank-10: 0.0136, eval/mAP: 0.0098, lr: 0.0005, train/prefecth_time: 0.0065 BEST_EVAL_ACC: 0.0016, at 49152 iters
+[2025-02-26 17:09:44,680 INFO] 51456 iteration USE_EMA: False, train/sup_loss: 4.9887, train/unsup_loss: 0.0000, train/total_loss: 4.9887, train/util_ratio: 0.0000, train/run_time: 1.1392, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 17:14:43,272 INFO] 51712 iteration USE_EMA: False, train/sup_loss: 5.0954, train/unsup_loss: 0.0000, train/total_loss: 5.0954, train/util_ratio: 0.0000, train/run_time: 1.1387, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 17:19:41,893 INFO] 51968 iteration USE_EMA: False, train/sup_loss: 4.6897, train/unsup_loss: 0.0000, train/total_loss: 4.6897, train/util_ratio: 0.0000, train/run_time: 1.1416, lr: 0.0005, train/prefecth_time: 0.0061 
+[2025-02-26 17:24:40,335 INFO] 52224 iteration USE_EMA: False, train/sup_loss: 5.0695, train/unsup_loss: 0.0000, train/total_loss: 5.0695, train/util_ratio: 0.0000, train/run_time: 1.1573, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 17:29:39,532 INFO] 52480 iteration USE_EMA: False, train/sup_loss: 4.6033, train/unsup_loss: 0.0000, train/total_loss: 4.6033, train/util_ratio: 0.0000, train/run_time: 1.1363, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 17:34:38,027 INFO] 52736 iteration USE_EMA: False, train/sup_loss: 5.3068, train/unsup_loss: 0.0000, train/total_loss: 5.3068, train/util_ratio: 0.0000, train/run_time: 1.1439, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 17:39:36,581 INFO] 52992 iteration USE_EMA: False, train/sup_loss: 4.9380, train/unsup_loss: 0.0000, train/total_loss: 4.9380, train/util_ratio: 0.0000, train/run_time: 1.1434, lr: 0.0005, train/prefecth_time: 0.0067 
+[2025-02-26 17:44:35,104 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 17:46:06,587 INFO] confusion matrix:
+[[0.00178317 0.00285307 0.00142653 ... 0.         0.         0.00035663]
+ [0.         0.         0.015625   ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.03846154 ... 0.         0.         0.        ]
+ [0.         0.         0.125      ... 0.         0.         0.        ]]
+[2025-02-26 17:46:13,060 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 17:46:13,062 INFO] 53248 iteration, USE_EMA: False, train/sup_loss: 4.5372, train/unsup_loss: 0.0000, train/total_loss: 4.5372, train/util_ratio: 0.0000, train/run_time: 1.1462, eval/loss: 9.4483, eval/top-1-acc: 0.0014, eval/top-5-acc: 0.0066, eval/balanced_acc: 0.0014, eval/precision: 0.0011, eval/recall: 0.0014, eval/F1: 0.0009, eval/rank-1: 0.0014, eval/rank-5: 0.0066, eval/rank-10: 0.0142, eval/mAP: 0.0100, lr: 0.0005, train/prefecth_time: 0.0065 BEST_EVAL_ACC: 0.0016, at 49152 iters
+[2025-02-26 17:51:12,637 INFO] 53504 iteration USE_EMA: False, train/sup_loss: 4.1635, train/unsup_loss: 0.0000, train/total_loss: 4.1635, train/util_ratio: 0.0000, train/run_time: 1.1405, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 17:56:11,589 INFO] 53760 iteration USE_EMA: False, train/sup_loss: 4.5974, train/unsup_loss: 0.0000, train/total_loss: 4.5974, train/util_ratio: 0.0000, train/run_time: 1.1510, lr: 0.0005, train/prefecth_time: 0.0069 
+[2025-02-26 18:01:10,550 INFO] 54016 iteration USE_EMA: False, train/sup_loss: 4.5986, train/unsup_loss: 0.0000, train/total_loss: 4.5986, train/util_ratio: 0.0000, train/run_time: 1.1310, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 18:06:09,413 INFO] 54272 iteration USE_EMA: False, train/sup_loss: 4.3928, train/unsup_loss: 0.0000, train/total_loss: 4.3928, train/util_ratio: 0.0000, train/run_time: 1.1356, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 18:11:08,885 INFO] 54528 iteration USE_EMA: False, train/sup_loss: 4.5276, train/unsup_loss: 0.0000, train/total_loss: 4.5276, train/util_ratio: 0.0000, train/run_time: 1.1333, lr: 0.0005, train/prefecth_time: 0.0062 
+[2025-02-26 18:16:07,848 INFO] 54784 iteration USE_EMA: False, train/sup_loss: 4.0694, train/unsup_loss: 0.0000, train/total_loss: 4.0694, train/util_ratio: 0.0000, train/run_time: 1.1394, lr: 0.0005, train/prefecth_time: 0.0066 
+[2025-02-26 18:21:06,533 INFO] 55040 iteration USE_EMA: False, train/sup_loss: 5.0198, train/unsup_loss: 0.0000, train/total_loss: 5.0198, train/util_ratio: 0.0000, train/run_time: 1.1445, lr: 0.0005, train/prefecth_time: 0.0070 
+[2025-02-26 18:26:05,225 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 18:27:36,823 INFO] confusion matrix:
+[[0.00071327 0.00249643 0.0010699  ... 0.00142653 0.         0.00035663]
+ [0.         0.015625   0.         ... 0.015625   0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 18:27:43,305 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 18:27:43,307 INFO] 55296 iteration, USE_EMA: False, train/sup_loss: 4.5866, train/unsup_loss: 0.0000, train/total_loss: 4.5866, train/util_ratio: 0.0000, train/run_time: 1.1402, eval/loss: 10.2318, eval/top-1-acc: 0.0013, eval/top-5-acc: 0.0069, eval/balanced_acc: 0.0013, eval/precision: 0.0014, eval/recall: 0.0013, eval/F1: 0.0009, eval/rank-1: 0.0013, eval/rank-5: 0.0069, eval/rank-10: 0.0138, eval/mAP: 0.0098, lr: 0.0005, train/prefecth_time: 0.0064 BEST_EVAL_ACC: 0.0016, at 49152 iters
+[2025-02-26 18:32:43,036 INFO] 55552 iteration USE_EMA: False, train/sup_loss: 4.6661, train/unsup_loss: 0.0000, train/total_loss: 4.6661, train/util_ratio: 0.0000, train/run_time: 1.1398, lr: 0.0005, train/prefecth_time: 0.0068 
+[2025-02-26 18:37:42,099 INFO] 55808 iteration USE_EMA: False, train/sup_loss: 4.6307, train/unsup_loss: 0.0000, train/total_loss: 4.6307, train/util_ratio: 0.0000, train/run_time: 1.1366, lr: 0.0005, train/prefecth_time: 0.0072 
+[2025-02-26 18:42:41,075 INFO] 56064 iteration USE_EMA: False, train/sup_loss: 5.2681, train/unsup_loss: 0.0000, train/total_loss: 5.2681, train/util_ratio: 0.0000, train/run_time: 1.1365, lr: 0.0005, train/prefecth_time: 0.0065 
+[2025-02-26 18:47:39,918 INFO] 56320 iteration USE_EMA: False, train/sup_loss: 5.8613, train/unsup_loss: 0.0000, train/total_loss: 5.8613, train/util_ratio: 0.0000, train/run_time: 1.1401, lr: 0.0005, train/prefecth_time: 0.0063 
+[2025-02-26 18:52:39,737 INFO] 56576 iteration USE_EMA: False, train/sup_loss: 4.4923, train/unsup_loss: 0.0000, train/total_loss: 4.4923, train/util_ratio: 0.0000, train/run_time: 1.1443, lr: 0.0005, train/prefecth_time: 0.0071 
+[2025-02-26 18:57:38,759 INFO] 56832 iteration USE_EMA: False, train/sup_loss: 2.6027, train/unsup_loss: 0.0000, train/total_loss: 2.6027, train/util_ratio: 0.0000, train/run_time: 1.1452, lr: 0.0005, train/prefecth_time: 0.0074 
+[2025-02-26 19:02:37,745 INFO] 57088 iteration USE_EMA: False, train/sup_loss: 3.9915, train/unsup_loss: 0.0000, train/total_loss: 3.9915, train/util_ratio: 0.0000, train/run_time: 1.1485, lr: 0.0005, train/prefecth_time: 0.0072 
+[2025-02-26 19:07:36,958 INFO] validating...
+/home/zakerian/miniconda3/envs/usb/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1471: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+[2025-02-26 19:09:08,634 INFO] confusion matrix:
+[[0.         0.         0.00285307 ... 0.00035663 0.         0.0010699 ]
+ [0.         0.         0.015625   ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]]
+[2025-02-26 19:09:15,140 INFO] model saved: ./saved_models/usb_cv/fixmatch_market1501_transReid/latest_model.pth
+[2025-02-26 19:09:15,142 INFO] 57344 iteration, USE_EMA: False, train/sup_loss: 5.0604, train/unsup_loss: 0.0000, train/total_loss: 5.0604, train/util_ratio: 0.0000, train/run_time: 1.1518, eval/loss: 10.2097, eval/top-1-acc: 0.0011, eval/top-5-acc: 0.0062, eval/balanced_acc: 0.0012, eval/precision: 0.0007, eval/recall: 0.0012, eval/F1: 0.0008, eval/rank-1: 0.0011, eval/rank-5: 0.0062, eval/rank-10: 0.0126, eval/mAP: 0.0094, lr: 0.0005, train/prefecth_time: 0.0064 BEST_EVAL_ACC: 0.0016, at 49152 iters
