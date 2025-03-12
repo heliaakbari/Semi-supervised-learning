@@ -1,0 +1,14 @@
+==========
+Args:Namespace(batch_size=64, data_dir='/home/zakerian/PPLR/PPLR/examples/data', dataset='market1501', height=256, part=3, rerank=False, resume='/home/zakerian/USB/fork2/Semi-supervised-learning/resnet50-19c8e357.pth', seed=1, width=128, workers=4)
+==========
+=> Market1501 loaded
+Dataset statistics:
+  ----------------------------------------
+  subset   | # ids | # images | # cameras
+  ----------------------------------------
+  train    |   751 |    12936 |         6
+  query    |   750 |     3368 |         6
+  gallery  |   751 |    15913 |         6
+  ----------------------------------------
+resnet50 is being used as network with pretrain equals to True and in the path None
+=> Loaded checkpoint '/home/zakerian/USB/fork2/Semi-supervised-learning/resnet50-19c8e357.pth'

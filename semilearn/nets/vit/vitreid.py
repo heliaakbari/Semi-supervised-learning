@@ -29,20 +29,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 from timm.layers import trunc_normal_
 from semilearn.nets.transformer_layers import load_checkpoint
+from timm.layers.helpers import to_2tuple
+from timm.layers import DropPath
 
 IMAGENET_DEFAULT_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_DEFAULT_STD = (0.229, 0.224, 0.225)
 
 from typing import Tuple, Union
-
-def to_2tuple(x: Union[int, Tuple[int, int]]) -> Tuple[int, int]:
-    if isinstance(x, int):
-        return (x, x)
-    elif isinstance(x, tuple) and len(x) == 2:
-        return x
-    else:
-        raise ValueError("Input must be an int or a tuple of two integers")
-
 
 class GeneralizedMeanPooling(nn.Module):
     r"""Applies a 2D power-average adaptive pooling over an input signal composed of several input planes.
@@ -87,16 +80,6 @@ def drop_path(x, drop_prob: float = 0., training: bool = False):
     random_tensor.floor_()  # binarize
     output = x.div(keep_prob) * random_tensor
     return output
-
-class DropPath(nn.Module):
-    """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
-    """
-    def __init__(self, drop_prob=None):
-        super(DropPath, self).__init__()
-        self.drop_prob = drop_prob
-
-    def forward(self, x):
-        return drop_path(x, self.drop_prob, self.training)
 
 
 class Mlp(nn.Module):
