@@ -365,7 +365,6 @@ class AlgorithmBase:
 
                 num_batch = y.shape[0]
                 total_num += num_batch
-
                 logits = self.model(x)[out_key]  # Get model predictions
                 loss = F.cross_entropy(logits, y, reduction='mean', ignore_index=-1)
 

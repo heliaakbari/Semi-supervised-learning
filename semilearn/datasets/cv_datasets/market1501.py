@@ -65,9 +65,9 @@ def get_transforms():
     Returns a dictionary of transformations.
     """
     train_transform = transforms.Compose([
-        transforms.Resize((256, 128)),
+        transforms.Resize((384, 128)),
         transforms.RandomHorizontalFlip(),
-        transforms.RandomCrop((256, 128), padding=(int(256 * (1 - 0.875)), int(128 * (1 - 0.875))), padding_mode='reflect'),
+        transforms.RandomCrop((384, 128), padding=(int(384 * (1 - 0.875)), int(128 * (1 - 0.875))), padding_mode='reflect'),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
@@ -76,7 +76,7 @@ def get_transforms():
     strong_transform.transforms.insert(0, RandAugment(3, 5))
 
     val_transform = transforms.Compose([
-        transforms.Resize((256, 128)),
+        transforms.Resize((384, 128)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
