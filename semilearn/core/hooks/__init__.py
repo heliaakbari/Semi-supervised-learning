@@ -12,3 +12,4 @@ from .timer import TimerHook
 from .ema import EMAHook
 from .wandb import WANDBHook
 from .aim import AimHook
+from .latest_model import LatestModelHook

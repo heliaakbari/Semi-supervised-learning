@@ -144,7 +144,7 @@ def get_config():
 
     ## standard setting configurations
     parser.add_argument("--data_dir", type=str, default="./data")
-    parser.add_argument("-ds", "--dataset", type=str, default="cifar10")
+    parser.add_argument("-ds", type=str, default="cifar10")
     parser.add_argument("-nc", "--num_classes", type=int, default=10)
     parser.add_argument("--train_sampler", type=str, default="RandomSampler")
     parser.add_argument("--num_workers", type=int, default=1)
@@ -177,7 +177,7 @@ def get_config():
     )
 
     ## cv dataset arguments
-    parser.add_argument("--img_size", type=int, default=32)
+    parser.add_argument("--img_size", type=int, default=(384, 128))
     parser.add_argument("--crop_ratio", type=float, default=0.875)
 
     ## nlp dataset arguments

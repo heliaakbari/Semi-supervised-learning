@@ -18,8 +18,8 @@ class EvaluationHook(Hook):
             algorithm.log_dict.update(eval_dict)
 
             # update best metrics
-            if algorithm.log_dict['eval/top-1-acc'] > algorithm.best_eval_acc:
-                algorithm.best_eval_acc = algorithm.log_dict['eval/top-1-acc']
+            if algorithm.log_dict['eval/mAP'] > algorithm.best_eval_acc:
+                algorithm.best_eval_acc = algorithm.log_dict['eval/mAP']
                 algorithm.best_it = algorithm.it
     
     def after_run(self, algorithm):

@@ -261,7 +261,8 @@ class ResNet50(nn.Module):
                 nwd.append(n)
         return nwd
 
-def resnet50(pretrained=False, pretrained_path=None, **kwargs):
+
+def resnet50(pretrained=True, pretrained_path='./', **kwargs):
     model = ResNet50(**kwargs)
     print(f"resnet50 is being used as network with pretrain equals to {pretrained} and in the path {pretrained_path}")
     return model

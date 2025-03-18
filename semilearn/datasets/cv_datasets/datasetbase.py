@@ -115,8 +115,8 @@ class BasicDataset(Dataset):
                 elif self.alg == 'comatch':
                     return {'idx_ulb': idx, 'x_ulb_w': img_w, 'x_ulb_s_0': self.strong_transform(img), 'x_ulb_s_1':self.strong_transform(img)} 
                 else:
-                    return {'idx_ulb': idx, 'x_ulb_w': img_w, 'x_ulb_s': self.strong_transform(img)} 
-
+                    img = self.strong_transform(img)
+                    return {'idx_ulb': idx, 'x_ulb_w': img_w, 'x_ulb_s': img}
 
     def __len__(self):
         return len(self.data)

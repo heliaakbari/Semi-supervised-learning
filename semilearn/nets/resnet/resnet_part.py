@@ -21,14 +21,14 @@ class ResNetPart(nn.Module):
         152: torchvision.models.resnet152,
     }
 
-    def __init__(self, depth=50, pretrained=True, num_parts=3, num_classes=0, pretrained_path=None):
+    def __init__(self, depth=50, pretrained=None, num_parts=3, num_classes=0, pretrained_path=None):
         super(ResNetPart, self).__init__()
         self.pretrained = pretrained
         self.depth = depth
         # Construct base (pretrained) resnet
         if depth not in ResNetPart.__factory:
             raise KeyError("Unsupported depth:", depth)
-        resnet = ResNetPart.__factory[depth](pretrained=pretrained)
+        resnet = ResNetPart.__factory[depth](weights=pretrained)
         resnet.layer4[0].conv2.stride = (1,1)
         resnet.layer4[0].downsample[0].stride = (1,1)
 

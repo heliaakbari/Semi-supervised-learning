@@ -13,7 +13,8 @@ import torch.nn.functional as F
 from torch.cuda.amp import autocast
 from torch.amp.grad_scaler import GradScaler
 
-from semilearn.core.hooks import Hook, get_priority, CheckpointHook, TimerHook, LoggingHook, DistSamplerSeedHook, ParamUpdateHook, EvaluationHook, EMAHook, WANDBHook, AimHook
+from semilearn.pplr_evaluation import start
+from semilearn.core.hooks import Hook, get_priority, CheckpointHook, TimerHook, LoggingHook, DistSamplerSeedHook, ParamUpdateHook, EvaluationHook, EMAHook, WANDBHook, AimHook, LatestModelHook
 from semilearn.core.utils import get_dataset, get_data_loader, get_optimizer, get_cosine_schedule_with_warmup, Bn_Controller
 from semilearn.core.criterions import CELoss, ConsistencyLoss
 
@@ -206,6 +207,7 @@ class AlgorithmBase:
         # parameter update hook is called inside each train_step
         self.register_hook(ParamUpdateHook(), None, "HIGHEST")
         self.register_hook(EMAHook(), None, "HIGH")
+        self.register_hook(LatestModelHook(), None, "HIGH")
         self.register_hook(EvaluationHook(), None, "HIGH")
         self.register_hook(CheckpointHook(), None, "HIGH")
         self.register_hook(DistSamplerSeedHook(), None, "NORMAL")
@@ -282,7 +284,6 @@ class AlgorithmBase:
         # return log_dict
         raise NotImplementedError
 
-
     def train(self):
         """
         train function
@@ -313,30 +314,6 @@ class AlgorithmBase:
             self.call_hook("after_train_epoch")
 
         self.call_hook("after_run")
-
-    def compute_map(self, probs, labels):
-        """
-        Compute Mean Average Precision (mAP).
-        """
-        num_samples = len(labels)
-        average_precisions = []
-
-        for i in range(num_samples):
-            y_true = np.zeros_like(labels)
-            y_true[labels[i]] = 1  # Set the correct label as 1
-
-            # Sort by probability scores
-            indices = np.argsort(-probs[i])  # Descending order
-            sorted_true = y_true[indices]
-
-            # Compute precision at each relevant position
-            correct = np.cumsum(sorted_true)
-            precision_at_k = correct / (np.arange(len(correct)) + 1)
-            average_precision = np.sum(precision_at_k * sorted_true) / max(1, sorted_true.sum())
-
-            average_precisions.append(average_precision)
-
-        return np.mean(average_precisions)
 
     def evaluate(self, eval_dest='eval', out_key='logits', return_logits=False):
         """
@@ -391,21 +368,14 @@ class AlgorithmBase:
         recall = recall_score(y_true, y_pred, average='macro')
         F1 = f1_score(y_true, y_pred, average='macro')
 
-        # Compute Rank-k Accuracy
-        rank1 = top_k_accuracy_score(y_true, y_probs, k=1)
-        rank5 = top_k_accuracy_score(y_true, y_probs, k=5)
-        rank10 = top_k_accuracy_score(y_true, y_probs, k=10)
-
-        # Compute mAP
-        mAP = self.compute_map(y_probs, y_true)
-
         # Print confusion matrix
         cf_mat = confusion_matrix(y_true, y_pred, normalize='true')
         self.print_fn('confusion matrix:\n' + np.array_str(cf_mat))
 
         self.ema.restore()
         self.model.train()
-
+        result = start()
+        print("mAP: ", result)
         eval_dict = {
             eval_dest + '/loss': total_loss / total_num,
             eval_dest + '/top-1-acc': top1,
@@ -414,14 +384,12 @@ class AlgorithmBase:
             eval_dest + '/precision': precision,
             eval_dest + '/recall': recall,
             eval_dest + '/F1': F1,
-            eval_dest + '/rank-1': rank1,
-            eval_dest + '/rank-5': rank5,
-            eval_dest + '/rank-10': rank10,
-            eval_dest + '/mAP': mAP
+            eval_dest + '/mAP': result
         }
 
         if return_logits:
             eval_dict[eval_dest + '/logits'] = y_logits
+
         return eval_dict
 
     def get_save_dict(self):
